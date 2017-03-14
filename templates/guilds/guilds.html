@@ -1,0 +1,11 @@
+{% extends '_layout.html' %}
+
+{% block title %}
+Guilds
+{% endblock %}
+
+{% block content %}
+    {% for item in object_list %}
+        <p>{{ item }}</p>
+    {% endfor %}
+{% endblock %}
