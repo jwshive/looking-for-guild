@@ -5,7 +5,7 @@ from autoslug import AutoSlugField
 
 
 class Factions(models.Model):
-    faction_id = models.IntegerField(null=False, blank=False)
+    faction_id = models.IntegerField(null=False, blank=False, primary_key=True, unique=True)
     faction_name = models.CharField(max_length=50)
 
     class Meta:
@@ -19,7 +19,7 @@ class Factions(models.Model):
 
 
 class Classes(models.Model):
-    class_id = models.IntegerField(null=False, blank=False)
+    class_id = models.IntegerField(null=False, blank=False, primary_key=True, unique=True)
     class_name = models.CharField(max_length=50)
 
     class Meta:
@@ -33,9 +33,9 @@ class Classes(models.Model):
 
 
 class Races(models.Model):
-    race_id = models.IntegerField(null=False, blank=False)
+    race_id = models.IntegerField(null=False, blank=False, primary_key=True, unique=True)
     race_name = models.CharField(max_length=50)
-    race_faction = models.ForeignKey(Factions)
+    race_faction = models.ForeignKey(Factions, to_field='faction_id')
 
     class Meta:
         managed = True
