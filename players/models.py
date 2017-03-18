@@ -12,7 +12,7 @@ class Factions(models.Model):
         managed = True
         db_table = 'factions'
         verbose_name_plural = 'Character Factions'
-        app_label = 'players'
+        #app_label = 'players'
 
     def __str__(self):
         return self.faction_name
@@ -26,7 +26,7 @@ class Classes(models.Model):
         managed = True
         db_table = 'classes'
         verbose_name_plural = 'Character Classes'
-        app_label = 'players'
+        #app_label = 'players'
 
     def __str__(self):
         return self.class_name
@@ -41,7 +41,7 @@ class Races(models.Model):
         managed = True
         db_table = 'races'
         verbose_name_plural = 'Character Races'
-        app_label = 'players'
+        #app_label = 'players'
 
     def __str__(self):
         return "%s - %s" % (self.race_faction.faction_name, self.race_name)
@@ -62,7 +62,7 @@ class Realms(models.Model):
         managed = True
         db_table = 'realms'
         verbose_name_plural = 'Realms'
-        app_label = 'players'
+        #app_label = 'players'
         ordering = ['realm_name']
 
     def __str__(self):
@@ -76,7 +76,7 @@ class BattleNetIDs(models.Model):
         managed = True
         db_table = 'battle_net_ids'
         verbose_name_plural = 'Battle Net IDs'
-        app_label = 'players'
+        #app_label = 'players'
 
     def __str__(self):
         return self.battle_net_id
@@ -129,7 +129,7 @@ class Characters(models.Model):
         managed = True
         db_table = 'characters'
         verbose_name_plural = 'Characters'
-        app_label = 'players'
+        #app_label = 'players'
 
     def __str__(self):
         return "%s of %s" % (self.character_name, self.character_realm)

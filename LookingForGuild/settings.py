@@ -24,7 +24,7 @@ SECRET_KEY = 'i&^^a4*v0lo(_#u7$i3p+#yn#(ae!)(ojhtmn&un@z(jgne_(&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['kalinakov.pythonanywhere.com']
+ALLOWED_HOSTS = ['kalinakov.pythonanywhere.com', '127.0.0.1']
 
 # Application definition
 
@@ -84,10 +84,6 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    },
-    'blizzard_api': {
-        'ENGINE': "django.db.backends.sqlite3",
-        'NAME': 'blizzard_api.db',
     }
 }
 
@@ -105,8 +101,8 @@ DATABASES = {
 #    }
 # }
 
-DATABASE_ROUTERS = ['players.routers.BlizzardApiRouter', 'guilds.routers.BlizzardApiRouter']
-DATABASE_APPS_MAPPING = {'blizzard_api': 'blizzard_api'}
+#DATABASE_ROUTERS = ['players.routers.BlizzardApiRouter', 'guilds.routers.BlizzardApiRouter']
+#DATABASE_APPS_MAPPING = {'blizzard_api': 'blizzard_api'}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators

@@ -1,3 +1,4 @@
+"""
 class BlizzardApiRouter(object):
 
     def db_for_read(self, model, **hints):
@@ -22,3 +23,4 @@ class BlizzardApiRouter(object):
         elif model._meta.app_label == 'players':
             return False
         return None
+"""
