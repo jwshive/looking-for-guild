@@ -19,8 +19,9 @@ from django.conf.urls.static import static
 from django.contrib import admin
 
 urlpatterns = [
+    #url(r'^', include('frontdoor.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('frontdoor.urls')),
+    url(r'^accounts/', include('allauth.urls')),
     url(r'^players/', include('players.urls')),
     url(r'^guilds/', include('guilds.urls'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

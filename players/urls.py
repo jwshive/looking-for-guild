@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .views import RealmsList, CharactersList, ClassesList, FactionsList, RacesList
+from .views import RealmsList, CharactersList, ClassesList, FactionsList, RacesList, oauth_test
 
 
 urlpatterns = [
@@ -8,5 +8,6 @@ urlpatterns = [
     url(r'^classes/', ClassesList.as_view(), name='classes-list'),
     url(r'^factions/', FactionsList.as_view(), name='factions-list'),
     url(r'^races/', RacesList.as_view(), name='races-list'),
+    url(r'^oauth/', oauth_test),
 ]
 

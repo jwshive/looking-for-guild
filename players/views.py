@@ -1,5 +1,6 @@
 from .models import Realms, Characters, Classes, Factions, Races
 from django.views.generic import ListView
+from django.shortcuts import render
 
 
 class RealmsList(ListView):
@@ -26,3 +27,5 @@ class RacesList(ListView):
     model = Races
     template_name = 'players/races.html'
 
+def oauth_test(request):
+    render(request, 'players/oauth.html')
