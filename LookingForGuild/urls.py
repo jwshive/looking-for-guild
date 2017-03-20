@@ -23,5 +23,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^players/', include('players.urls')),
-    url(r'^guilds/', include('guilds.urls'))
+    url(r'^guilds/', include('guilds.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
