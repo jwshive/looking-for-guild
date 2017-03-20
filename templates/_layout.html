@@ -34,9 +34,6 @@
   </head>
 
   <body>
-  {{request.user.username}}
-  {{request.user}}
-  {{request}}
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -48,17 +45,26 @@
           </button>
           <a class="navbar-brand" href="#">Project name</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form>
-        </div><!--/.navbar-collapse -->
+          {% if user.is_authenticated %}
+            <div id="navbar" class="navbar-collapse collapse">
+                <a class="btn btn-success" href="{% url 'account_logout' %}">Logout</a>
+                {% if user.is_superuser %}
+                    <a class="btn btn-success" href="/admin/">Admin</a>
+                {% endif %}
+            </div><!--/.navbar-collapse -->
+          {% else %}
+            <div id="navbar" class="navbar-collapse collapse">
+              <form class="navbar-form navbar-right" action="{% url 'account_login' %}">
+                <div class="form-group">
+                  <input type="text" placeholder="Email" class="form-control">
+                </div>
+                <div class="form-group">
+                  <input type="password" placeholder="Password" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-success">Sign in</button>
+              </form>
+            </div><!--/.navbar-collapse -->
+          {% endif %}
       </div>
     </nav>
 

@@ -102,8 +102,8 @@ DATABASES = {
 #    }
 # }
 
-#DATABASE_ROUTERS = ['players.routers.BlizzardApiRouter', 'guilds.routers.BlizzardApiRouter']
-#DATABASE_APPS_MAPPING = {'blizzard_api': 'blizzard_api'}
+# DATABASE_ROUTERS = ['players.routers.BlizzardApiRouter', 'guilds.routers.BlizzardApiRouter']
+# DATABASE_APPS_MAPPING = {'blizzard_api': 'blizzard_api'}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -151,8 +151,8 @@ redirect_uri = '/'
 LOGIN_REDIRECT_URL = redirect_uri
 
 AUTHENTICATION_BACKENDS = (
-        'django.contrib.auth.backends.ModelBackend',
-        'allauth.account.auth_backends.AuthenticationBackend',
-        )
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
 
-SOCIALACCOUNT_PROVIDERS = {'battlenet': {'SCOPE': ['wow.profile',],}}
+SOCIALACCOUNT_PROVIDERS = {'battlenet': {'SCOPE': ['wow.profile', ], }}

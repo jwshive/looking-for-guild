@@ -9,4 +9,4 @@ class GuildList(ListView):
 
 class CreateGuild(CreateView):
     model = Guilds
-    fields = ['guild_name', 'guild_realm', 'guild_level', 'guild_faction']
+    fields = ['guild_created_by', 'guild_name', 'guild_realm', 'guild_level', 'guild_faction']
