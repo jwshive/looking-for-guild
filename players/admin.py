@@ -8,7 +8,7 @@ class RaceAdmin(admin.ModelAdmin):
 
 
 class TimezonesAdmin(admin.ModelAdmin):
-    list_display = ('abbrv', 'full_name', 'offset')
+    list_display = ('abbrv', 'full_name')
 
 
 class RealmAdmin(admin.ModelAdmin):
@@ -19,6 +19,10 @@ class CharacterAdmin(admin.ModelAdmin):
     list_display = ('character_name', 'character_realm', 'character_level', 'character_class', 'character_race', 'character_owner')
 
 
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'battle_net_id', 'user_timezone', 'looking_for_guild')
+
+
 admin.site.register(Characters, CharacterAdmin)
 admin.site.register(Classes)
 admin.site.register(Factions)
@@ -26,4 +30,4 @@ admin.site.register(Realms, RealmAdmin)
 admin.site.register(Races, RaceAdmin)
 admin.site.register(Timezones, TimezonesAdmin)
 admin.site.register(Regions)
-admin.site.register(Profile)
+admin.site.register(Profile, ProfileAdmin)

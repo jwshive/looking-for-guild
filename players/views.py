@@ -3,6 +3,7 @@ from guilds.models import Guilds, RecruitmentPosts
 from django.views.generic import ListView, DetailView
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 
 class RealmsList(ListView):
@@ -36,6 +37,6 @@ def MyProfile(request):
     context = {
             'my_guilds': Guilds.objects.filter(guild_created_by=current_user), 
             'my_characters': Characters.objects.filter(character_owner=current_user),
-            'my_profile': Profile.objects.filter(user=current_user)
+            'my_profile': User.objects.filter(username=current_user)
             }
     return render(request, 'players/profile.html', context)

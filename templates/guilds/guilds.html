@@ -6,6 +6,10 @@ Guilds
 
 {% block content %}
     {% for item in object_list %}
-        <p>{{ item }}</p>
+        {% if item.is_recruiting %}
+        <p>{{ item }} - recruiting</p>
+        {% else %}
+        <p>{{ item }} - not recruiting</p>
+        {% endif %}
     {% endfor %}
 {% endblock %}

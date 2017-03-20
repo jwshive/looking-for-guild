@@ -7,7 +7,6 @@ from django.contrib.auth.models import User
 class Timezones(models.Model):
     abbrv = models.CharField(max_length=10, null=False, blank=False)
     full_name = models.CharField(max_length=100, null=False, blank=False)
-    offset = models.CharField(max_length=100, null=False, blank=False)
 
     class Meta:
         managed = True
@@ -15,7 +14,7 @@ class Timezones(models.Model):
         verbose_name_plural = 'Timezone Listings'
 
     def __str__(self):
-        return "%s - %s (%s)" % (self.abbrv, self.full_name, self.offset)
+        return "%s - %s" % (self.abbrv, self.full_name)
 
 
 class Factions(models.Model):
@@ -100,6 +99,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     battle_net_id = models.CharField(max_length=50, null=False, blank=False)
     user_timezone = models.ForeignKey(Timezones, blank=False, null=False)
+    looking_for_guild = models.BooleanField(default=False)
     last_login = models.DateTimeField(auto_now=True)
 
     def __str__(self):

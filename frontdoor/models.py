@@ -18,3 +18,21 @@ class FrontDoorNews(models.Model):
 
     def __str__(self):
         return "%s, written on %s by %s" % (self.news_title, self.news_creation_date, self.news_author.first_name + " " + self.news_author.last_name)
+
+
+class Feedback(models.Model):
+    feedback_submitted_by = models.ForeignKey(User)
+    feedback_subject = models.CharField(max_length=100)
+    feedback_body = models.TextField()
+    feedback_submitted_on = models.DateTimeField(auto_now_add=True)
+    feedback_read = models.BooleanField(default=False)
+    feedback_responded_to = models.BooleanField(default=False)
+
+    class Meta:
+        managed = True
+        db_table = 'feedback'
+        verbose_name_plural = 'User Feedback'
+        app_label = 'frontdoor'
+
+    def __str__(self):
+        return "Feedback Submitted by %s (%s) on %s" % (self.feedback_submitted_by, self.feedback_submitted_by.email, self.feedback_submitted_on)

@@ -5,6 +5,7 @@ from django.views.generic import ListView, CreateView
 class GuildList(ListView):
     model = Guilds
     template_name = 'guilds/guilds.html'
+    ordering = ['is_recruiting']
 
 
 class CreateGuild(CreateView):

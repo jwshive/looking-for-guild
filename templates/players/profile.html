@@ -8,7 +8,8 @@
 <!--- My Profile --->
 <h2>My Profile</h2>
 {% for item in my_profile %}
-  <p> {{ item }} </p>
+  <p> {{ item.username }} </p>
+  <p> {{ item.profile.battle_net_id }} </p>
 {% endfor %}
 
 <!--- Show Guilds I Own --->
