@@ -100,6 +100,10 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     battle_net_id = models.CharField(max_length=50, null=False, blank=False)
     user_timezone = models.ForeignKey(Timezones, blank=False, null=False)
+    last_login = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return "%s's Profile Details" % self.user.username
 
 
 class Characters(models.Model):

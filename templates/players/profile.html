@@ -1,0 +1,26 @@
+{% extends '_layout.html' %}
+
+{% block title %}
+{{ user.username }} - My Profile
+{% endblock %}
+
+{% block content %}
+<!--- My Profile --->
+<h2>My Profile</h2>
+{% for item in my_profile %}
+  <p> {{ item }} </p>
+{% endfor %}
+
+<!--- Show Guilds I Own --->
+<h2>My Guilds</h2>
+{% for guild in my_guilds %}
+  <p> {{ guild.guild_realm }} - {{ guild.guild_faction }} - {{ guild.guild_name }}</p>
+{% endfor %}
+
+<!--- Show Characters I've Created --->
+<h2>My Characters</h2>
+{% for character in my_characters %}
+  <p> {{ character.character_realm }} - {{ character.character_faction}} - {{ character.character_name }}</p>
+{% endfor %}
+
+{% endblock %}

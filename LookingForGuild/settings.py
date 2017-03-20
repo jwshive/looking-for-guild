@@ -147,7 +147,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'runtime_static')
 
 SITE_ID = 1
 
-redirect_uri = '/'
+redirect_uri = '/players/profile'
 LOGIN_REDIRECT_URL = redirect_uri
 
 AUTHENTICATION_BACKENDS = (
