@@ -43,8 +43,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.battlenet',
-    'allauth.socialaccount.providers.discord',
+#    'allauth.socialaccount.providers.battlenet',
+#    'allauth.socialaccount.providers.discord',
 ]
 
 MIDDLEWARE = [
@@ -155,4 +155,4 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-SOCIALACCOUNT_PROVIDERS = {'battlenet': {'SCOPE': ['wow.profile', ], }}
+#SOCIALACCOUNT_PROVIDERS = {'battlenet': {'SCOPE': ['wow.profile', ], }}

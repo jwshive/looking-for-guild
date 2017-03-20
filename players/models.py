@@ -1,6 +1,21 @@
 from __future__ import unicode_literals
 from django.db import models
 from autoslug import AutoSlugField
+from django.contrib.auth.models import User
+
+
+class Timezones(models.Model):
+    abbrv = models.CharField(max_length=10, null=False, blank=False)
+    full_name = models.CharField(max_length=100, null=False, blank=False)
+    offset = models.CharField(max_length=100, null=False, blank=False)
+
+    class Meta:
+        managed = True
+        db_table = 'timezones'
+        verbose_name_plural = 'Timezone Listings'
+
+    def __str__(self):
+        return "%s - %s (%s)" % (self.abbrv, self.full_name, self.offset)
 
 
 class Factions(models.Model):
@@ -68,60 +83,34 @@ class Realms(models.Model):
         return self.realm_name
 
 
-class BattleNetIDs(models.Model):
-    battle_net_id = models.CharField(max_length=50, blank=False, null=False)
+class Regions(models.Model):
+    region_name = models.CharField(max_length=3, null=False, blank=False)
 
     class Meta:
         managed = True
-        db_table = 'battle_net_ids'
-        verbose_name_plural = 'Battle Net IDs'
-        #app_label = 'players'
+        db_table = 'regions'
+        verbose_name_plural = 'Regions'
+        ordering = ['region_name']
 
     def __str__(self):
-        return self.battle_net_id
+        return self.region_name.upper()
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    battle_net_id = models.CharField(max_length=50, null=False, blank=False)
+    user_timezone = models.ForeignKey(Timezones, blank=False, null=False)
 
 
 class Characters(models.Model):
-    character_battle_net_id = models.ForeignKey(BattleNetIDs)
+    character_owner = models.ForeignKey(User)
     character_name = models.CharField(max_length=255)
     character_realm = models.ForeignKey(Realms)
     character_class = models.ForeignKey(Classes)
     character_race = models.ForeignKey(Races)
     character_level = models.IntegerField()
     character_faction = models.ForeignKey(Factions)
-    character_ilevel = models.IntegerField()
-    character_ilevel_equipped = models.IntegerField()
-    character_head = models.CharField(max_length=50)
-    character_neck = models.CharField(max_length=50)
-    character_shoulder = models.CharField(max_length=50)
-    character_back = models.CharField(max_length=50)
-    character_chest = models.CharField(max_length=50)
-    character_wrist = models.CharField(max_length=50)
-    character_hands = models.CharField(max_length=50)
-    character_waist = models.CharField(max_length=50)
-    character_legs = models.CharField(max_length=50)
-    character_feet = models.CharField(max_length=50)
-    character_finger1 = models.CharField(max_length=50)
-    character_finger2 = models.CharField(max_length=50)
-    character_trinket1 = models.CharField(max_length=50)
-    character_trinket2 = models.CharField(max_length=50)
-    character_mainhand = models.CharField(db_column='character_mainHand', max_length=50)  # Field name made lowercase.
-    character_offhand = models.CharField(db_column='character_offHand', max_length=50)  # Field name made lowercase.
-    character_agility = models.IntegerField()
-    character_armor = models.IntegerField()
-    character_block = models.FloatField()
-    character_critical_strike = models.FloatField()
-    character_dodge = models.FloatField()
-    character_haste = models.FloatField()
-    character_health = models.IntegerField()
-    character_intellect = models.IntegerField()
-    character_leech = models.FloatField()
-    character_mastery = models.FloatField()
-    character_parry = models.FloatField()
-    character_power = models.IntegerField()
-    character_stamina = models.IntegerField()
-    character_strength = models.IntegerField()
-    character_versatility = models.IntegerField()
+    character_armory_url = models.URLField()
     load_date = models.DateField()
 
     class Meta:
