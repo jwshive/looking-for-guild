@@ -23,8 +23,10 @@ SECRET_KEY = 'i&^^a4*v0lo(_#u7$i3p+#yn#(ae!)(ojhtmn&un@z(jgne_(&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
-ALLOWED_HOSTS = ['kalinakov.pythonanywhere.com', '127.0.0.1']
+ALLOWED_HOSTS = ['kalinakov.pythonanywhere.com', '127.0.0.1', 'looking-for-guild-klainn.c9users.io']
 
 # Application definition
 

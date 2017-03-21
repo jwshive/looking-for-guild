@@ -1,0 +1,27 @@
+{% extends '_layout.html' %}
+
+{% block title %}
+Details for {{ object.recruitment_title }}
+{% endblock %}
+
+{% block content %}
+
+    {{ object.guild_name }}
+    <br>
+    {{ object.guild_faction }}
+    <br>
+    {{ object.recruiting_levels }}
+    <br>
+    Recruiting Classes: {% for x in object.recruiting_classes.all %} {{ x }} {% endfor %}
+    <br>
+    {{ object.recruitment_title }}
+    <br>
+    {{ object.recruitment_post }}
+    <br>
+    {{ object.is_post_active }}
+
+
+{% endblock %}
+
+
+

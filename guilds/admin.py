@@ -3,7 +3,7 @@ from .models import Guilds, RecruitmentPosts
 
 
 class GuildAdmin(admin.ModelAdmin):
-    list_display = ('guild_name', 'guild_realm', 'guild_faction', 'guild_created_by', 'is_active')
+    list_display = ('guild_name', 'guild_realm', 'guild_faction', 'guild_created_by', 'is_active', 'is_recruiting')
 
 
 class RecruitmentPostAdmin(admin.ModelAdmin):

@@ -5,11 +5,18 @@ Guilds
 {% endblock %}
 
 {% block content %}
-    {% for item in object_list %}
-        {% if item.is_recruiting %}
-        <p>{{ item }} - recruiting</p>
-        {% else %}
-        <p>{{ item }} - not recruiting</p>
-        {% endif %}
+
+{% regroup object_list by guild_realm as realm %}
+    {% for guild_realm in realm %}
+        <h1>{{ guild_realm.grouper }}</h1>
+        {% for guild in guild_realm.list %}
+            {% if guild.is_recruiting %}
+                <p><a href="{% url 'guild-detail' guild.pk %}">{{ guild.guild_name }}</a></p>
+            {% endif %}
+        {% endfor %}
     {% endfor %}
+
 {% endblock %}
+
+
+

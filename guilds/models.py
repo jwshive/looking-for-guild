@@ -1,6 +1,7 @@
 from django.db import models
 from players.models import Realms, Factions, Classes, Factions
 from django.contrib.auth.models import User, Group
+from autoslug import AutoSlugField
 
 
 class Guilds(models.Model):
@@ -8,7 +9,6 @@ class Guilds(models.Model):
     guild_realm = models.ForeignKey(Realms)
     guild_faction = models.ForeignKey(Factions)
     guild_created_by = models.ForeignKey(User)
-    guild_managers = models.ForeignKey(Group)
     guild_information = models.TextField()
     guild_battlenet_website = models.URLField(null=True, blank=True)
     guild_external_website = models.URLField(null=True, blank=True)
@@ -25,9 +25,10 @@ class Guilds(models.Model):
         db_table = 'guilds'
         verbose_name_plural = 'Player Guilds'
         #app_label = 'guilds'
-
+        ordering = ['guild_realm']
+        
     def __str__(self):
-        return "%s of %s" % (self.guild_name, self.guild_realm)
+        return self.guild_name
 
 
 class RecruitmentPosts(models.Model):

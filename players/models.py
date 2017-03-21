@@ -97,7 +97,7 @@ class Regions(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    battle_net_id = models.CharField(max_length=50, null=False, blank=False)
+    battle_net_id = models.CharField(max_length=50, null=False, blank=False, unique=True)
     user_timezone = models.ForeignKey(Timezones, blank=False, null=False)
     looking_for_guild = models.BooleanField(default=False)
     last_login = models.DateTimeField(auto_now=True)

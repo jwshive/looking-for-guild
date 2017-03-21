@@ -1,0 +1,43 @@
+{% extends '_layout.html' %}
+
+{% block title %}
+Details for {{ object.guild_name }}
+{% endblock %}
+
+{% block content %}
+
+    {{ object.guild_name }}
+    <br>
+    {{ object.guild_realm }}
+    <br>
+    {{ object.guild_faction }}
+    <br>
+    {{ object.guild_created_by }}
+    <br>
+    {{ object.guild_information }}
+    <br>
+    {{ object.guild_battlenet_website }}
+    <br>
+    {{ object.guild_external_website }}
+    <br>
+    {{ object.guild_wow_progress_link }}
+    <br>
+    {{ object.guild_warcraft_logs_link }}
+    <br>
+    {{ object.guild_world_of_logs_link }}
+    <br>
+    {{ object.create_date }}
+    <br>
+    {{ object.last_updated }}
+    <br>
+    Active Guild: {{ object.is_active }}
+    <br>
+    Recruiting: {{ object.is_recruiting }}
+    <br>
+    Recruitment Posts: {% for rcp in object.recruitmentposts_set.all %} <a href="{% url 'recruitment-post' rcp.pk %}">{{ rcp.recruitment_title }}</a> {% endfor %}
+
+
+{% endblock %}
+
+
+

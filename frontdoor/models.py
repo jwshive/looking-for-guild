@@ -21,7 +21,7 @@ class FrontDoorNews(models.Model):
 
 
 class Feedback(models.Model):
-    feedback_submitted_by = models.ForeignKey(User)
+    feedback_submitted_by = models.ForeignKey(User, on_delete=models.CASCADE)
     feedback_subject = models.CharField(max_length=100)
     feedback_body = models.TextField()
     feedback_submitted_on = models.DateTimeField(auto_now_add=True)
