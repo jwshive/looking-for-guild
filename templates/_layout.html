@@ -47,6 +47,7 @@
         </div>
           {% if user.is_authenticated %}
             <div id="navbar" class="navbar-collapse collapse">
+                <a class="btn btn-success" href="{% url 'user-profile' %}">My Profile</a>
                 <a class="btn btn-success" href="{% url 'account_logout' %}">Logout</a>
                 {% if user.is_superuser %}
                     <a class="btn btn-success" href="/admin">Admin</a>

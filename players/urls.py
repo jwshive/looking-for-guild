@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .views import RealmsList, CharactersList, FactionsList, RacesList, MyProfile, CreateCharacter
+from .views import RealmsList, CharactersList, FactionsList, RacesList, MyProfile, CreateCharacter, UpdateMyProfile
 from django.contrib.auth.decorators import login_required
 
 
@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'^factions/', FactionsList.as_view(), name='factions-list'),
     url(r'^races/', RacesList.as_view(), name='races-list'),
     url(r'^profile/', MyProfile, name='user-profile'),
+    url(r'^update_profile/(?P<pk>[^/]+)', login_required(UpdateMyProfile.as_view()), name='update-profile'),
 ]
 

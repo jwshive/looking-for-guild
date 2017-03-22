@@ -1,0 +1,22 @@
+{% extends '_layout.html' %}
+{% load humanize %}
+
+{% block title %}
+    Add Recruitment Post
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <!-- Example row of columns -->
+  <div class="row">
+    <div class="col-md-12">
+      {% for user in user_object %}{{ user }}{% endfor %}
+      <form method="post">
+        {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Submit" />
+      </form>
+    </div>
+  </div>
+{% endblock %}
+

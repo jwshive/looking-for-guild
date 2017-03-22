@@ -7,6 +7,9 @@
 {% block content %}
 <!--- My Profile --->
 <h2>My Profile</h2>
+{% for info in my_profile %}
+<h4><a href="{% url 'update-profile' info.profile.id  %}">Update My Profile</a></h4>
+{% endfor %}
 {% for item in my_profile %}
   <p> {{ item.username }} </p>
   <p> {{ item.profile.battle_net_id }} </p>
