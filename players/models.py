@@ -2,6 +2,8 @@ from __future__ import unicode_literals
 from django.db import models
 from autoslug import AutoSlugField
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class Timezones(models.Model):
@@ -97,13 +99,19 @@ class Regions(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    battle_net_id = models.CharField(max_length=50, null=False, blank=False, unique=True)
-    user_timezone = models.ForeignKey(Timezones, blank=False, null=False)
+    battle_net_id = models.CharField(max_length=50, null=True, blank=True, unique=True)
+    user_timezone = models.ForeignKey(Timezones, blank=True, null=True)
     looking_for_guild = models.BooleanField(default=False)
     last_login = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return "%s's Profile Details" % self.user.username
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
 
 
 class Characters(models.Model):

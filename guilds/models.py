@@ -33,7 +33,6 @@ class Guilds(models.Model):
 
 class RecruitmentPosts(models.Model):
     guild_name = models.ForeignKey(Guilds)
-    guild_faction = models.ForeignKey(Factions)
     recruiting_levels = models.CharField(max_length=100)
     recruiting_classes = models.ManyToManyField(Classes)
     recruitment_title = models.CharField(max_length=200)

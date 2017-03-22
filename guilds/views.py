@@ -25,7 +25,7 @@ class CreateGuild(CreateView):
     model = Guilds
     template_name = 'guilds/add_guild.html'
     fields = ['guild_name', 'guild_realm', 'guild_faction', 'guild_information', 'guild_battlenet_website', 'guild_external_website', 'guild_wow_progress_link', 'guild_warcraft_logs_link', 'guild_world_of_logs_link', 'is_recruiting']
-    success_url = '/'
+    success_url = '/players/profile'
 
     def form_valid(self, form):
         form.instance.guild_created_by = self.request.user
@@ -35,8 +35,8 @@ class CreateGuild(CreateView):
 class CreateRecruitmentPost(CreateView):
     model = RecruitmentPosts
     template_name = 'guilds/add_recruitment_post.html'
-    fields = 'guild_faction', 'recruiting_levels', 'recruiting_classes', 'recruitment_title', 'recruitment_post'
-    success_url = '/'
+    fields = 'recruiting_levels', 'recruiting_classes', 'recruitment_title', 'recruitment_post'
+    success_url = '/players/profile'
     
     def get_context_data(self, **kwargs):
         ctx = super(CreateRecruitmentPost, self).get_context_data(**kwargs)

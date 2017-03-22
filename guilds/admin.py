@@ -7,7 +7,7 @@ class GuildAdmin(admin.ModelAdmin):
 
 
 class RecruitmentPostAdmin(admin.ModelAdmin):
-    list_display = ('guild_name', 'guild_faction', 'recruitment_title', 'is_post_active')
+    list_display = ('guild_name', 'recruitment_title', 'is_post_active')
 
 
 admin.site.register(Guilds, GuildAdmin)
