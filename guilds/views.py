@@ -1,4 +1,5 @@
 from .models import Guilds, RecruitmentPosts
+from players.models import Classes
 from django.views.generic import ListView, CreateView, DetailView
 
 
@@ -28,5 +29,22 @@ class CreateGuild(CreateView):
 
     def form_valid(self, form):
         form.instance.guild_created_by = self.request.user
-        return super(CreateGuild, self).form_valid(form)        
+        return super(CreateGuild, self).form_valid(form)   
         
+        
+class CreateRecruitmentPost(CreateView):
+    model = RecruitmentPosts
+    template_name = 'guilds/add_recruitment_post.html'
+    fields = 'guild_faction', 'recruiting_levels', 'recruiting_classes', 'recruitment_title', 'recruitment_post'
+    success_url = '/'
+    
+    def get_context_data(self, **kwargs):
+        ctx = super(CreateRecruitmentPost, self).get_context_data(**kwargs)
+        ctx['guild_object'] = Guilds.objects.filter(pk=self.kwargs['guild_pk'])
+        return ctx
+
+    def form_valid(self, form):
+        form.instance.guild_name_id = self.kwargs['guild_pk']
+        return super(CreateRecruitmentPost, self).form_valid(form) 
+        
+    

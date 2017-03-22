@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Characters, Classes, Factions, Realms, Races, Timezones, Regions, Profile
+from .models import Characters, Classes, Factions, Realms, Races, Timezones, Regions, Profile, Abilities
 # Register your models here.
 
 
@@ -23,6 +23,9 @@ class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'battle_net_id', 'user_timezone', 'looking_for_guild')
     
 
+cla
+
+
 admin.site.register(Characters, CharacterAdmin)
 admin.site.register(Classes)
 admin.site.register(Factions)
@@ -31,3 +34,4 @@ admin.site.register(Races, RaceAdmin)
 admin.site.register(Timezones, TimezonesAdmin)
 admin.site.register(Regions)
 admin.site.register(Profile, ProfileAdmin)
+admin.site.register(Abilities)

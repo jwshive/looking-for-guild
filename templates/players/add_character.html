@@ -1,0 +1,22 @@
+{% extends '_layout.html' %}
+{% load humanize %}
+
+{% block title %}
+    Submit Feedback
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <!-- Example row of columns -->
+  <div class="row">
+    <div class="col-md-12">
+        Adding character for {% for x in player_object %}{{ x }}{% endfor %}
+      <form method="post">
+        {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Submit" />
+      </form>
+    </div>
+  </div>
+{% endblock %}
+

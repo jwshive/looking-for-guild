@@ -15,13 +15,16 @@
 <!--- Show Guilds I Own --->
 <h2>My Guilds</h2>
 {% for guild in my_guilds %}
-  <p> {{ guild.guild_realm }} - {{ guild.guild_faction }} - {{ guild.guild_name }}</p>
+  <p>{{ guild.guild_realm }} - {{ guild.guild_faction }} - {{ guild.guild_name }} <a href="{% url 'add-recruitment-post' guild_pk=guild.pk %}">(Add Recruitment Post)</a></p>
 {% endfor %}
+<h3><a href="{% url 'add-guild' user.id %}">Add a new Guild</a></h3>
 
 <!--- Show Characters I've Created --->
 <h2>My Characters</h2>
 {% for character in my_characters %}
   <p> {{ character.character_realm }} - {{ character.character_faction}} - {{ character.character_name }}</p>
 {% endfor %}
+<h3><a href="{% url 'add-character' user.id %}">Add a new Character</a></h3>
+
 
 {% endblock %}

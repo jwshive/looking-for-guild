@@ -30,19 +30,19 @@ class Factions(models.Model):
     def __str__(self):
         return self.faction_name
 
-
 class Classes(models.Model):
-    class_id = models.IntegerField(null=False, blank=False, primary_key=True, unique=True)
-    class_name = models.CharField(max_length=50)
-
-    class Meta:
-        managed = True
-        db_table = 'classes'
-        verbose_name_plural = 'Character Classes'
-        #app_label = 'players'
-
-    def __str__(self):
-        return self.class_name
+        class_name = models.CharField(max_length=50)
+        blizzard_class_id = models.IntegerField()
+    
+        class Meta:
+            managed = True
+            db_table = 'classes'
+            verbose_name_plural = 'Character Classes'
+            ordering = ['class_name']
+            #app_label = 'players'
+    
+        def __str__(self):
+            return self.class_name
 
 
 class Races(models.Model):
@@ -115,7 +115,7 @@ class Characters(models.Model):
     character_level = models.IntegerField()
     character_faction = models.ForeignKey(Factions)
     character_armory_url = models.URLField()
-    load_date = models.DateField()
+    load_date = models.DateField(auto_now_add=True)
 
     class Meta:
         managed = True

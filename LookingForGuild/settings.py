@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+#    'allauth.socialaccount.providers.google',
 #    'allauth.socialaccount.providers.battlenet',
 #    'allauth.socialaccount.providers.discord',
 ]
@@ -147,7 +148,7 @@ STATICFILES_DIRS = (
 )
 STATIC_ROOT = os.path.join(BASE_DIR, 'runtime_static')
 
-SITE_ID = 1
+SITE_ID = 2
 
 redirect_uri = '/players/profile'
 LOGIN_REDIRECT_URL = redirect_uri
@@ -158,3 +159,14 @@ AUTHENTICATION_BACKENDS = (
 )
 
 #SOCIALACCOUNT_PROVIDERS = {'battlenet': {'SCOPE': ['wow.profile', ], }}
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
