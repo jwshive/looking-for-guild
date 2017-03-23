@@ -68,7 +68,7 @@ def CreateCharacter(request, character_owner):
 class UpdateMyProfile(UpdateView):
     model = Profile
     template_name = 'players/update_profile.html'
-    fields = 'battle_net_id', 'user_timezone', 'looking_for_guild', 'biography', 'looking_for_guild_advertisement'
+    fields = 'battle_net_id', 'user_timezone', 'biography'
     success_url = '/players/profile'
     
     def get_context_data(self, **kwargs):
