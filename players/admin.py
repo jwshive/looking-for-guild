@@ -20,11 +20,11 @@ class CharacterAdmin(admin.ModelAdmin):
 
 
 class CharactersDetailsAdmin(admin.ModelAdmin):
-    list_display = ('character_link', 'character_level', 'character_class', 'character_race')
+    list_display = ('character_link', 'character_level', 'character_class', 'character_race', 'looking_for_guild')
     
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'battle_net_id', 'user_timezone', 'looking_for_guild')
+    list_display = ('user', 'battle_net_id', 'user_timezone')
     
 
 admin.site.register(Characters, CharacterAdmin)

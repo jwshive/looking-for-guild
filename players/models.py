@@ -102,8 +102,6 @@ class Profile(models.Model):
     battle_net_id = models.CharField(max_length=50, null=True, blank=True, unique=True)
     user_timezone = models.ForeignKey(Timezones, blank=True, null=True)
     biography = models.TextField(null=True, blank=True)
-    looking_for_guild = models.BooleanField(default=False)
-    looking_for_guild_advertisement = models.TextField(null=True, blank=True)
     last_login = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -138,6 +136,8 @@ class CharactersDetails(models.Model):
     character_class = models.ForeignKey(Classes, null=True, blank=True)
     character_race = models.ForeignKey(Races, null=True, blank=True)
     character_level = models.IntegerField(null=True, blank=True)
+    looking_for_guild = models.BooleanField(default=False)
+    looking_for_guild_advertisement = models.TextField(null=True, blank=True)
     character_armory_url = models.URLField(null=True, blank=True)
     character_profile_image_url = models.CharField(max_length=100, null=True, blank=True)
     character_profile_avatar_url = models.CharField(max_length=100, null=True, blank=True)
