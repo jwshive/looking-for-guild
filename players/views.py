@@ -8,26 +8,6 @@ from django.contrib.auth.models import User
 from players.forms import AddCharacterForm
 
 
-class RealmsList(ListView):
-    model = Realms
-    template_name = 'players/realms.html'
-
-
-class CharactersList(ListView):
-    model = Characters
-    template_name = 'players/characters.html'
-
-
-class FactionsList(ListView):
-    model = Factions
-    template_name = 'players/factions.html'
-
-
-class RacesList(ListView):
-    model = Races
-    template_name = 'players/races.html'
-
-
 @login_required
 def MyProfile(request):
     current_user = request.user

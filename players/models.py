@@ -126,6 +126,7 @@ class Characters(models.Model):
         db_table = 'characters'
         verbose_name_plural = 'Characters'
         #app_label = 'players'
+        unique_together = ('character_owner', 'character_name', 'character_realm', 'character_faction')
 
     def __str__(self):
         return "%s of %s" % (self.character_name, self.character_realm)
@@ -148,6 +149,7 @@ class CharactersDetails(models.Model):
         db_table = 'characters_details'
         verbose_name_plural = 'Character Details'
         
-        def __str__(self):
-            return "%s of %s (%s) Details" % (self.character_link.character_name, self.character_link.character_realm, self.character_link.character_faction)
+        
+    def __str__(self):
+        return "%s of %s (%s) Details" % (self.character_link.character_name, self.character_link.character_realm, self.character_link.character_faction)
     
