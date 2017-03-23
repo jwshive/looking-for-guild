@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Characters, Classes, Factions, Realms, Races, Timezones, Regions, Profile
+from .models import Characters, CharactersDetails, Classes, Factions, Realms, Races, Timezones, Regions, Profile
 # Register your models here.
 
 
@@ -16,14 +16,19 @@ class RealmAdmin(admin.ModelAdmin):
 
 
 class CharacterAdmin(admin.ModelAdmin):
-    list_display = ('character_name', 'character_realm', 'character_level', 'character_class', 'character_race', 'character_owner')
+    list_display = ('character_name', 'character_realm', 'character_faction', 'character_owner')
 
+
+class CharactersDetailsAdmin(admin.ModelAdmin):
+    list_display = ('character_link', 'character_level', 'character_class', 'character_race')
+    
 
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'battle_net_id', 'user_timezone', 'looking_for_guild')
     
 
 admin.site.register(Characters, CharacterAdmin)
+admin.site.register(CharactersDetails, CharactersDetailsAdmin)
 admin.site.register(Classes)
 admin.site.register(Factions)
 admin.site.register(Realms, RealmAdmin)

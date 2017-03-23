@@ -2,6 +2,19 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+class WebsiteAPISettings(models.Model):
+    wow_api_key = models.CharField(max_length=100)
+    wow_api_secret = models.CharField(max_length=100)
+    wow_api_character_url_fields = models.CharField(max_length=200)
+    wow_api_base_url = models.URLField()
+    wow_api_character_image_base_url = models.URLField()
+    
+    class Meta:
+        managed = True
+        db_table = 'website_api_settings'
+        verbose_name_plural = "Website API Settings"
+        
+
 class FrontDoorNews(models.Model):
     news_title = models.CharField(max_length=255, blank=False, null=False)
     news_content = models.TextField()

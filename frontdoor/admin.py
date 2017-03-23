@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import FrontDoorNews, Feedback
+from .models import FrontDoorNews, Feedback, WebsiteAPISettings
 
 
 class FrontDoorNewsAdmin(admin.ModelAdmin):
@@ -12,4 +12,5 @@ class FeedbackAdmin(admin.ModelAdmin):
 
 admin.site.register(FrontDoorNews, FrontDoorNewsAdmin)
 admin.site.register(Feedback, FeedbackAdmin)
+admin.site.register(WebsiteAPISettings)
 

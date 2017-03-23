@@ -8,13 +8,10 @@
 <!--- My Profile --->
 <h2>My Profile</h2>
 
-{% for info in my_profile %}
-<h4><a href="{% url 'update-profile' info.profile.id  %}">Update My Profile</a></h4>
-{% endfor %}
-{% for item in my_profile %}
-  <p> Looking for a guild: {% if item.profile.looking_for_guild %}Yes{% else %}No{% endif %} </p>
-  <p> {% if item.profile.battle_net_id %}{{ item.profile.battle_net_id }}{% else %}Update your profile to set a BattleNet ID.{% endif %} </p>
-{% endfor %}
+<h4><a href="{% url 'update-profile' my_profile.profile.id  %}">Update My Profile</a></h4>
+<p> Looking for a guild: {% if my_profile.profile.looking_for_guild %}Yes{% else %}No{% endif %} </p>
+<p> {% if my_profile.profile.battle_net_id %}{{ my_profile.profile.battle_net_id }}{% else %}Update your profile to set a BattleNet ID.{% endif %} </p>
+
 
 <!--- Show Guilds I Own --->
 <h2>My Guilds</h2>
@@ -26,9 +23,8 @@
 <!--- Show Characters I've Created --->
 <h2>My Characters</h2>
 {% for character in my_characters %}
-  <p> {{ character.character_realm }} - {{ character.character_faction}} - {{ character.character_name }}</p>
+  <p> {{ character.character_realm }} - {{ character.character_faction}} - <a href="{% url 'character-details' character.id %}">{{ character.character_name }}</a></p>
 {% endfor %}
 <h3><a href="{% url 'add-character' user.id %}">Add a new Character</a></h3>
-
 
 {% endblock %}

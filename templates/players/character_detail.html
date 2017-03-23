@@ -1,0 +1,20 @@
+{% extends '_layout.html' %}
+
+{% block title %}
+Character Details - {{ character_info.character_link.character_name }}
+{% endblock %}
+
+{% block content %}
+
+    Update {{ character_info.character_link.character_name }}'s Profile.
+    <a href="{% url 'update-character-details' character_info.id %}">Here!</a>
+
+    Background Image <br>
+    <img src="{{ site_settings.wow_api_character_image_base_url }}{{ character_info.character_profile_image_url }}"></img>
+
+    Profile Image <br>
+    <img src="{{ site_settings.wow_api_character_image_base_url }}{{ character_info.character_profile_avatar_url }}"></img>
+
+    Inset Image <br>
+    <img src="{{ site_settings.wow_api_character_image_base_url }}{{ character_info.character_profile_inset_url }}"></img>
+{% endblock %}
