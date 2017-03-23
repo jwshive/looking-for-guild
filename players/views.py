@@ -84,7 +84,7 @@ class UpdateMyProfile(UpdateView):
 class UpdateCharacterProfile(UpdateView):
     model = CharactersDetails
     template_name = 'players/update_character_profile.html'
-    fields = 'character_class', 'character_race', 'character_level'
+    fields = 'character_class', 'character_race', 'character_level', 'looking_for_guild', 'looking_for_guild_advertisement'
     success_url = '/players/profile'
   
     def get_context_data(self, **kwargs):
