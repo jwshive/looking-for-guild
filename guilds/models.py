@@ -26,6 +26,7 @@ class Guilds(models.Model):
         verbose_name_plural = 'Player Guilds'
         #app_label = 'guilds'
         ordering = ['guild_realm']
+        unique_together = ('guild_name', 'guild_realm', 'guild_faction')
         
     def __str__(self):
         return self.guild_name
