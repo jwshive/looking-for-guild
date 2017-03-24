@@ -10,7 +10,7 @@
   <!-- Example row of columns -->
   <div class="row">
     <div class="col-md-12">
-      Recruitment Post for: {{ guild_object.guild_name }} - {{ guild_object.guild_realm }} - {{ guild_object.guild_faction }}
+      Updating: {{ guild_profile_object.guild_name }} - {{ guild_profile_object.guild_realm }}
       <form method="post">
         {% csrf_token %}
       {{ form.as_p }}

@@ -12,12 +12,13 @@ from players.forms import AddCharacterForm
 def MyProfile(request):
     current_user = request.user
     context = {
-            'my_guilds': Guilds.objects.filter(guild_created_by=current_user), 
-            'my_characters': Characters.objects.filter(character_owner=current_user),
-            'my_profile': User.objects.select_related('profile').get(username=current_user),
-            }
+        'my_guilds': Guilds.objects.filter(guild_created_by=current_user),
+        'my_characters': Characters.objects.filter(character_owner=current_user),
+        'my_profile': User.objects.select_related('profile').get(username=current_user),
+    }
     return render(request, 'players/profile.html', context)
-    
+
+
 @login_required
 def CharacterDetail(request, pk):
     context = {
@@ -25,6 +26,7 @@ def CharacterDetail(request, pk):
         'character_info': CharactersDetails.objects.select_related('character_link').get(character_link_id=pk)
     }
     return render(request, 'players/character_detail.html', context)
+
 
 @login_required
 def CreateCharacter(request, character_owner):
@@ -43,14 +45,14 @@ def CreateCharacter(request, character_owner):
     else:
         form = AddCharacterForm()
     return render(request, 'players/add_character.html', {'form': form})
-        
+
 
 class UpdateMyProfile(UpdateView):
     model = Profile
     template_name = 'players/update_profile.html'
     fields = 'battle_net_id', 'user_timezone', 'biography'
     success_url = '/players/profile'
-    
+
     def get_context_data(self, **kwargs):
         ctx = super(UpdateMyProfile, self).get_context_data(**kwargs)
         ctx['profile_object'] = Profile.objects.filter(user_id=self.kwargs['pk'])
@@ -58,16 +60,17 @@ class UpdateMyProfile(UpdateView):
 
     def form_valid(self, form):
         form.instance.profile_id = self.kwargs['pk']
-        return super(UpdateMyProfile, self).form_valid(form)     
-        
-        
+        return super(UpdateMyProfile, self).form_valid(form)
+
+
 class UpdateCharacterProfile(UpdateView):
     model = CharactersDetails
     template_name = 'players/update_character_profile.html'
     fields = 'character_class', 'character_race', 'character_level', 'looking_for_guild', 'looking_for_guild_advertisement'
     success_url = '/players/profile'
-  
+
     def get_context_data(self, **kwargs):
         ctx = super(UpdateCharacterProfile, self).get_context_data(**kwargs)
-        ctx['character_profile_object'] = CharactersDetails.objects.select_related('character_link').get(id=self.kwargs['pk'])
+        ctx['character_profile_object'] = CharactersDetails.objects.select_related('character_link').get(
+            id=self.kwargs['pk'])
         return ctx

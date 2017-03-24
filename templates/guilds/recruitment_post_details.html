@@ -5,7 +5,8 @@ Details for {{ object.recruitment_title }}
 {% endblock %}
 
 {% block content %}
-
+    <a href="{% url 'update-recruitment-post' object.id %}">Update Recruitment Post</a>
+    <br>
     <a href="{% url 'guild-detail' object.guild_name.pk %}">{{ object.guild_name }}</a>
     <br>
     {{ object.guild_faction }}

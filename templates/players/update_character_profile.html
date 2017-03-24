@@ -10,7 +10,7 @@
   <!-- Example row of columns -->
   <div class="row">
     <div class="col-md-12">
-      Updating: {{ character_profile_object.character_link.character_name }}
+      Updating: {{ character_profile_object.character_link.character_name }} - {{ character_profile_object.character_link.character_realm }}
       <form method="post">
         {% csrf_token %}
       {{ form.as_p }}
