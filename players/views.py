@@ -11,13 +11,11 @@ from players.forms import AddCharacterForm
 
 @login_required
 def MyProfile(request):
-    current_user = request.user
-    my_id = Characters.objects.get(character_owner_id=current_user.id)
     context = {
-        'my_guilds': Guilds.objects.filter(guild_created_by=current_user),
-        'my_characters': CharactersDetails.objects.select_related('character_link').filter(character_link_id=my_id.id),
+        'my_guilds': Guilds.objects.filter(guild_created_by=request.user),
+        'my_characters': CharactersDetails.objects.select_related('character_link').filter(character_link__character_owner_id=request.user.id).order_by('character_link__character_realm'),
         'website_settings': WebsiteAPISettings.objects.get(pk=1),
-        'my_profile': User.objects.select_related('profile').get(username=current_user),
+        'my_profile': User.objects.select_related('profile').get(username=request.user),
     }
     return render(request, 'players/profile.html', context)
 

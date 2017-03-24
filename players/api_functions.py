@@ -1,7 +1,4 @@
-try:
-    import urllib2
-except ImportError:
-    from urllib.request import urlopen
+from urllib.request import urlopen
 
 
 import json

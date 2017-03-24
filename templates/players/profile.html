@@ -7,6 +7,8 @@
 {% block content %}
 <!--- My Profile --->
 <h2>My Profile</h2>
+{{ user.id }}
+<br>
 {{ my_id.id }}
 <h4><a href="{% url 'update-profile' my_profile.profile.id  %}">Update My Profile</a></h4>
 <p> {% if my_profile.profile.battle_net_id %}{{ my_profile.profile.battle_net_id }}{% else %}Update your profile to set a BattleNet ID.{% endif %} </p>
