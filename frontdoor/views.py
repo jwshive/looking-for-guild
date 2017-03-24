@@ -1,7 +1,5 @@
 from django.views.generic import ListView, CreateView
-from django.contrib.auth.models import User
 from .models import FrontDoorNews, Feedback
-from .forms import FeedbackForm
 
 
 class FrontDoorNewsView(ListView):
@@ -9,7 +7,7 @@ class FrontDoorNewsView(ListView):
     model = FrontDoorNews
     template_name = 'frontdoor/index.html'
     ordering = ['-news_creation_date']
-    
+
 
 class FeedbackFormView(CreateView):
     model = Feedback
@@ -19,4 +17,12 @@ class FeedbackFormView(CreateView):
 
     def form_valid(self, form):
         form.instance.feedback_submitted_by = self.request.user
-        return super(FeedbackFormView, self).form_valid(form)        
+        return super(FeedbackFormView, self).form_valid(form)
+
+
+class SearchForPlayers():
+    pass
+
+
+class SearchForGuilds():
+    pass

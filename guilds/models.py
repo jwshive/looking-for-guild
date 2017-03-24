@@ -24,7 +24,6 @@ class Guilds(models.Model):
         managed = True
         db_table = 'guilds'
         verbose_name_plural = 'Player Guilds'
-        #app_label = 'guilds'
         ordering = ['guild_realm']
         unique_together = ('guild_name', 'guild_realm', 'guild_faction')
         

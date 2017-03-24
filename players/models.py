@@ -7,7 +7,7 @@ from django.dispatch import receiver
 
 
 class Timezones(models.Model):
-    abbrv = models.CharField(max_length=10, null=False, blank=False)
+    short_name = models.CharField(max_length=10, null=False, blank=False)
     full_name = models.CharField(max_length=100, null=False, blank=False)
 
     class Meta:
@@ -16,7 +16,7 @@ class Timezones(models.Model):
         verbose_name_plural = 'Timezone Listings'
 
     def __str__(self):
-        return "%s - %s" % (self.abbrv, self.full_name)
+        return "%s - %s" % (self.short_name, self.full_name)
 
 
 class Factions(models.Model):
@@ -27,7 +27,6 @@ class Factions(models.Model):
         managed = True
         db_table = 'factions'
         verbose_name_plural = 'Character Factions'
-        #app_label = 'players'
 
     def __str__(self):
         return self.faction_name
@@ -41,8 +40,7 @@ class Classes(models.Model):
             db_table = 'classes'
             verbose_name_plural = 'Character Classes'
             ordering = ['class_name']
-            #app_label = 'players'
-    
+
         def __str__(self):
             return self.class_name
 
@@ -56,7 +54,6 @@ class Races(models.Model):
         managed = True
         db_table = 'races'
         verbose_name_plural = 'Character Races'
-        #app_label = 'players'
 
     def __str__(self):
         return "%s - %s" % (self.race_faction.faction_name, self.race_name)
@@ -77,7 +74,6 @@ class Realms(models.Model):
         managed = True
         db_table = 'realms'
         verbose_name_plural = 'Realms'
-        #app_label = 'players'
         ordering = ['realm_name']
 
     def __str__(self):
@@ -125,7 +121,6 @@ class Characters(models.Model):
         managed = True
         db_table = 'characters'
         verbose_name_plural = 'Characters'
-        #app_label = 'players'
         unique_together = ('character_owner', 'character_name', 'character_realm', 'character_faction')
 
     def __str__(self):
@@ -148,7 +143,6 @@ class CharactersDetails(models.Model):
         managed = True
         db_table = 'characters_details'
         verbose_name_plural = 'Character Details'
-        
         
     def __str__(self):
         return "%s of %s (%s) Details" % (self.character_link.character_name, self.character_link.character_realm, self.character_link.character_faction)

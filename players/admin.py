@@ -8,7 +8,7 @@ class RaceAdmin(admin.ModelAdmin):
 
 
 class TimezonesAdmin(admin.ModelAdmin):
-    list_display = ('abbrv', 'full_name')
+    list_display = ('short_name', 'full_name')
 
 
 class RealmAdmin(admin.ModelAdmin):

@@ -1,7 +1,6 @@
 from django.views.generic import UpdateView
 
 from .models import Guilds, RecruitmentPosts
-from players.models import Classes
 from django.views.generic import ListView, CreateView, DetailView
 
 
