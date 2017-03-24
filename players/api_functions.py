@@ -1,4 +1,8 @@
-from urllib import urlopen
+try:
+    import urllib2
+except ImportError:
+    from urllib.request import urlopen
+
 
 import json
 import codecs
