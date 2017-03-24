@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
 from django.views.generic import UpdateView
 
 from .models import Guilds, RecruitmentPosts
@@ -71,3 +73,9 @@ class UpdateRecruitmentPost(UpdateView):
         ctx = super(UpdateRecruitmentPost, self).get_context_data(**kwargs)
         ctx['recruitment_post_object'] = RecruitmentPosts.objects.select_related('guild_name').get(id=self.kwargs['pk'])
         return ctx
+
+
+@login_required()
+def DeleteGuild(request,pk):
+    Guilds.objects.get(id=pk).delete()
+    return redirect('/players/profile')

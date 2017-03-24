@@ -1,4 +1,4 @@
-from .models import Realms, Characters, Factions, Races, Profile, CharactersDetails
+from .models import Realms, Characters, Factions, Profile, CharactersDetails
 from guilds.models import Guilds
 from frontdoor.models import WebsiteAPISettings
 from django.views.generic import UpdateView
@@ -30,6 +30,7 @@ def CharacterDetail(request, pk):
 
 @login_required
 def CreateCharacter(request, character_owner):
+    OwnerDetails = User.objects.get(pk=character_owner)
     if request.method == "POST":
         form = AddCharacterForm(request.POST)
         if form.is_valid():
@@ -44,7 +45,7 @@ def CreateCharacter(request, character_owner):
             return redirect('user-profile')
     else:
         form = AddCharacterForm()
-    return render(request, 'players/add_character.html', {'form': form})
+    return render(request, 'players/add_character.html', {'form': form, 'OwnerDetails': OwnerDetails})
 
 
 class UpdateMyProfile(UpdateView):
@@ -74,3 +75,9 @@ class UpdateCharacterProfile(UpdateView):
         ctx['character_profile_object'] = CharactersDetails.objects.select_related('character_link').get(
             id=self.kwargs['pk'])
         return ctx
+
+
+@login_required()
+def DeleteCharacter(request,pk):
+    Characters.objects.get(id=pk).delete()
+    return redirect('/players/profile')

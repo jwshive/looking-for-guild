@@ -5,6 +5,8 @@ Details for {{ object.guild_name }}
 {% endblock %}
 
 {% block content %}
+    Delete this guild => <a href="{% url 'delete-guild' object.id %}">Delete {{ object.guild_name }} - {{ object.guild_realm }} - {{ object.guild_faction }}</a><= This happens immediately.
+    <br>
     <a href="{% url 'update-guild-profile' object.id %}">Update Guild Details</a>
     <br>
     {{ object.guild_name }}

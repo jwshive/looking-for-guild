@@ -10,6 +10,8 @@
   <!-- Example row of columns -->
   <div class="row">
     <div class="col-md-12">
+        Delete this character => <a href="{% url 'delete-character' character_profile_object.id %}">Delete {{ character_profile_object.character_link.character_name }} - {{ character_profile_object.character_link.character_realm }} - {{ character_profile_object.character_link.character_faction }}</a><= This happens immediately.
+        <br>
       Updating: {{ character_profile_object.character_link.character_name }} - {{ character_profile_object.character_link.character_realm }}
       <form method="post">
         {% csrf_token %}
