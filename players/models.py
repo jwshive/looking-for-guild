@@ -66,7 +66,7 @@ class Races(models.Model):
         verbose_name_plural = 'Character Races'
 
     def __str__(self):
-        return "%s - %s" % (self.race_faction.faction_name, self.race_name)
+        return self.race_name
 
 
 class Realms(models.Model):

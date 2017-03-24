@@ -19,6 +19,9 @@ Character Details - {{ character_info.character_link.character_name }}
     {{ character_info.character_race }}
     <br>
     {{ character_info.character_level }}
+    <br>
+    {{ character_info.character_faction }}
+    <br>
     Update {{ character_info.character_link.character_name }}'s Profile.
     <a href="{% url 'update-character-details' character_info.id %}">Here!</a>
 
