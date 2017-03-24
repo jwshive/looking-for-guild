@@ -6,15 +6,25 @@ Character Details - {{ character_info.character_link.character_name }}
 
 {% block content %}
 
+    {{ character_info.get_main_role_display }}
+    <br>
+    {{ character_info.get_alt_role_display }}
+    <br>
+    {{ character_info.character_armory_url_simple }}
+    <br>
+    {{ character_info.character_armory_url_advanced }}
+    <br>
+    {{ character_info.character_class }}
+    <br>
+    {{ character_info.character_race }}
+    <br>
+    {{ character_info.character_level }}
     Update {{ character_info.character_link.character_name }}'s Profile.
     <a href="{% url 'update-character-details' character_info.id %}">Here!</a>
 
-    Background Image <br>
     <img src="{{ site_settings.wow_api_character_image_base_url }}{{ character_info.character_profile_image_url }}"></img>
-
-    Profile Image <br>
+    <br>
     <img src="{{ site_settings.wow_api_character_image_base_url }}{{ character_info.character_profile_avatar_url }}"></img>
-
-    Inset Image <br>
+    <br>
     <img src="{{ site_settings.wow_api_character_image_base_url }}{{ character_info.character_profile_inset_url }}"></img>
 {% endblock %}

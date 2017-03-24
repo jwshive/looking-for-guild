@@ -3,17 +3,22 @@ from django.contrib.auth.models import User
 
 
 class WebsiteAPISettings(models.Model):
+    api_settings_name = models.CharField(max_length=100)
     wow_api_key = models.CharField(max_length=100)
     wow_api_secret = models.CharField(max_length=100)
     wow_api_character_url_fields = models.CharField(max_length=200)
     wow_api_base_url = models.URLField()
     wow_api_character_image_base_url = models.URLField()
-    
+    wow_armory_base_url_simple = models.URLField()
+    wow_armory_base_url_advanced = models.URLField()
+
     class Meta:
         managed = True
         db_table = 'website_api_settings'
         verbose_name_plural = "Website API Settings"
-        
+
+    def __str__(self):
+        return self.api_settings_name
 
 class FrontDoorNews(models.Model):
     news_title = models.CharField(max_length=255, blank=False, null=False)

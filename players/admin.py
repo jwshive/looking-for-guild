@@ -16,11 +16,11 @@ class RealmAdmin(admin.ModelAdmin):
 
 
 class CharacterAdmin(admin.ModelAdmin):
-    list_display = ('character_name', 'character_realm', 'character_faction', 'character_owner')
+    list_display = ('character_name', 'character_realm', 'character_owner')
 
 
 class CharactersDetailsAdmin(admin.ModelAdmin):
-    list_display = ('character_link', 'character_level', 'character_class', 'character_race', 'looking_for_guild')
+    list_display = ('character_link', 'character_level', 'character_class', 'character_race', 'looking_for_guild', 'character_faction')
     
 
 class ProfileAdmin(admin.ModelAdmin):

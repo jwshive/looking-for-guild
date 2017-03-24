@@ -6,6 +6,15 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
+ROLES = (
+    ('MELEE_DPS', 'Melee DPS'),
+    ('RANGED_DPS', 'Ranged DPS'),
+    ('TANK', 'Tank'),
+    ('HEALER', 'Healer'),
+    ('NO_ROLE_SELECTED', 'No Role Selected'),
+)
+
+
 class Timezones(models.Model):
     short_name = models.CharField(max_length=10, null=False, blank=False)
     full_name = models.CharField(max_length=100, null=False, blank=False)
@@ -30,6 +39,7 @@ class Factions(models.Model):
 
     def __str__(self):
         return self.faction_name
+
 
 class Classes(models.Model):
         class_name = models.CharField(max_length=50)
@@ -114,14 +124,13 @@ class Characters(models.Model):
     character_owner = models.ForeignKey(User)
     character_name = models.CharField(max_length=255)
     character_realm = models.ForeignKey(Realms)
-    character_faction = models.ForeignKey(Factions)
     insert_date = models.DateField(auto_now_add=True)
 
     class Meta:
         managed = True
         db_table = 'characters'
         verbose_name_plural = 'Characters'
-        unique_together = ('character_owner', 'character_name', 'character_realm', 'character_faction')
+        unique_together = ('character_owner', 'character_name', 'character_realm')
 
     def __str__(self):
         return "%s of %s" % (self.character_name, self.character_realm)
@@ -129,12 +138,16 @@ class Characters(models.Model):
 
 class CharactersDetails(models.Model):
     character_link = models.ForeignKey(Characters)
+    character_faction = models.ForeignKey(Factions)
     character_class = models.ForeignKey(Classes, null=True, blank=True)
     character_race = models.ForeignKey(Races, null=True, blank=True)
     character_level = models.IntegerField(null=True, blank=True)
+    main_role = models.CharField(max_length=30, choices=ROLES, default="NO_ROLE_SELECTED", null=True, blank=True)
+    alt_role = models.CharField(max_length=30, choices=ROLES, default="NO_ROLE_SELECTED", null=True, blank=True)
     looking_for_guild = models.BooleanField(default=False)
     looking_for_guild_advertisement = models.TextField(null=True, blank=True)
-    character_armory_url = models.URLField(null=True, blank=True)
+    character_armory_url_simple = models.URLField(null=True, blank=True)
+    character_armory_url_advanced = models.URLField(null=True, blank=True)
     character_profile_image_url = models.CharField(max_length=100, null=True, blank=True)
     character_profile_avatar_url = models.CharField(max_length=100, null=True, blank=True)
     character_profile_inset_url = models.CharField(max_length=100, null=True, blank=True)
@@ -145,5 +158,4 @@ class CharactersDetails(models.Model):
         verbose_name_plural = 'Character Details'
         
     def __str__(self):
-        return "%s of %s (%s) Details" % (self.character_link.character_name, self.character_link.character_realm, self.character_link.character_faction)
-    
+        return "%s of %s (%s) Details" % (self.character_link.character_name, self.character_link.character_realm, self.character_faction)
