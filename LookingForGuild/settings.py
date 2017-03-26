@@ -171,5 +171,4 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-
-#ACCOUNT_SIGNUP_FORM_CLASS = 'players.forms.SignupForm'
+ACCOUNT_EMAIL_REQUIRED = True
