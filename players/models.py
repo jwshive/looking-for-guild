@@ -158,4 +158,15 @@ class CharactersDetails(models.Model):
         verbose_name_plural = 'Character Details'
         
     def __str__(self):
-        return "%s of %s (%s) Details" % (self.character_link.character_name, self.character_link.character_realm, self.character_faction)
+        return "%s of %s (%s) Details" % (
+            self.character_link.character_name,
+            self.character_link.character_realm,
+            self.character_faction
+        )
+
+    def create_character_slug(self):
+        return "%s-%s-%s" % (
+            self.character_link.character_name.lower(),
+            self.character_link.character_realm.realm_name.lower().replace(' ', '-'),
+            self.character_faction.faction_name.lower()
+        )
