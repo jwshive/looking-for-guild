@@ -2,7 +2,7 @@
 {% load humanize %}
 
 {% block title %}
-    Add Recruitment Post
+    Update Recruitment Post - {{ recruitment_post_object.guild_name }}
 {% endblock %}
 
 {% block content %}
@@ -10,7 +10,7 @@
   <!-- Example row of columns -->
   <div class="row">
     <div class="col-md-12">
-      Updating: {{ recruitment_post_object. }}
+      Updating: {{ recruitment_post_object.recruitment_title }}
       <form method="post">
         {% csrf_token %}
       {{ form.as_p }}
