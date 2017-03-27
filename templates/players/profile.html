@@ -24,7 +24,7 @@
 <!--- Show Characters I've Created --->
 <h2>My Characters</h2>
 {% for character in my_characters %}
-  <p><img src="{{ website_settings.wow_api_character_image_base_url }}/{{ character.character_profile_inset_url }}">{{ character.character_link.character_realm }} - {{ character.character_faction}} - <a href="{% url 'character-details' character.character_link.id %}">{{ character.character_link.character_name }}</a></p>
+  <p><img src="{{ website_settings.wow_api_character_image_base_url }}/{{ character.character_profile_inset_url }}">{{ character.character_link.character_realm }} - {{ character.character_faction}} - <a href="{% url 'character-details' character.character_link.id %}">{{ character.character_link.character_name }}</a> - {{ character.character_class }}</p>
 {% endfor %}
 <h3><a href="{% url 'add-character' user.id %}">Add a new Character</a></h3>
 

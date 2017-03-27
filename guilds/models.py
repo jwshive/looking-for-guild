@@ -1,7 +1,6 @@
 from django.db import models
 from players.models import Realms, Factions, Classes, Factions
 from django.contrib.auth.models import User, Group
-from autoslug import AutoSlugField
 
 
 class Guilds(models.Model):
