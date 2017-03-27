@@ -1,18 +1,17 @@
 from players.api_functions import get_character_api_information
 from .models import Realms, Characters, Factions, Profile, CharactersDetails, Classes
-from guilds.models import Guilds
+from guilds.models import RecruitmentPosts, Guilds
 from frontdoor.models import WebsiteAPISettings
 from django.views.generic import UpdateView
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from players.forms import AddCharacterForm
 
 
-@login_required
 def MyProfile(request):
     context = {
         'my_guilds': Guilds.objects.filter(guild_created_by=request.user),
+        'my_recruitment_posts': RecruitmentPosts.objects.select_related('guild_name').filter(guild_name__guild_created_by=request.user),
         'my_characters': CharactersDetails.objects.select_related('character_link').filter(character_link__character_owner_id=request.user.id).order_by('character_link__character_realm'),
         'website_settings': WebsiteAPISettings.objects.get(pk=1),
         'my_profile': User.objects.select_related('profile').get(username=request.user),
@@ -20,7 +19,6 @@ def MyProfile(request):
     return render(request, 'players/profile.html', context)
 
 
-@login_required
 def CharacterDetail(request, pk):
     context = {
         'site_settings': WebsiteAPISettings.objects.all().get(),
@@ -29,7 +27,6 @@ def CharacterDetail(request, pk):
     return render(request, 'players/character_detail.html', context)
 
 
-@login_required
 def CreateCharacter(request, character_owner):
     OwnerDetails = User.objects.get(pk=character_owner)
     if request.method == "POST":
@@ -93,7 +90,6 @@ class UpdateCharacterProfile(UpdateView):
         return ctx
 
 
-@login_required()
 def DeleteCharacter(request, pk):
     Characters.objects.get(pk=pk).delete()
     return redirect('/players/profile')
