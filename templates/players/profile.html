@@ -8,11 +8,24 @@ My Profile - {{ user.username }}
 
     <!--- My Profile --->
     <h2>My Profile</h2>
-    {{ user.id }}
-    <br>
-    {{ my_id.id }}
     <h4><a href="{% url 'update-profile' my_profile.profile.id  %}">Update My Profile</a></h4>
-    <p> {% if my_profile.profile.battle_net_id %}{{ my_profile.profile.battle_net_id }}{% else %}Update your profile to set a BattleNet ID.{% endif %} </p>
+    <p>{% if my_profile.profile.battle_net_id %}
+       {{ my_profile.profile.battle_net_id }}
+    {% else %}
+        Update your profile to set a BattleNet ID.
+    {% endif %}</p>
+
+    <p>{% if my_profile.profile.user_timezone %}
+       {{ my_profile.profile.user_timezone }}
+    {% else %}
+        Update your profile to set your Timezone.
+    {% endif %}</p>
+
+    <p>{% if my_profile.profile.biography %}
+       {{ my_profile.profile.biography }}
+    {% else %}
+        Update your profile to fill out your game history.
+    {% endif %}</p>
 
 
     <!--- Show Guilds I Own --->
@@ -24,9 +37,27 @@ My Profile - {{ user.username }}
 
     <!--- Show Characters I've Created --->
     <h2>My Characters</h2>
-    {% for character in my_characters %}
-      <p><img src="{{ website_settings.wow_api_character_image_base_url }}/{{ character.character_profile_inset_url }}">{{ character.character_link.character_realm }} - {{ character.character_faction}} - <a href="{% url 'character-details' character.character_link.id %}">{{ character.character_link.character_name }}</a> - {{ character.character_class }}</p>
-    {% endfor %}
+
     <h3><a href="{% url 'add-character' user.id %}">Add a new Character</a></h3>
 
+    <table>
+        <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Realm</th>
+            <th>Faction</th>
+            <th>Class</th>
+        </tr>
+        {% for character in my_characters %}
+            <tr>
+                <td><img src="{{ website_settings.wow_api_character_image_base_url }}/{{ character.character_profile_inset_url }}"></td>
+                <td><a href="{% url 'character-details' character.character_link.id %}">{{ character.character_link.character_name }}</a></td>
+                <td>{{ character.character_link.character_realm }}</td>
+                <td>{{ character.character_faction}}</td>
+                <td>{{ character.character_class }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
 {% endblock %}
+
