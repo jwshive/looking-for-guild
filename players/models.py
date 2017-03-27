@@ -108,7 +108,6 @@ class Profile(models.Model):
     battle_net_id = models.CharField(max_length=50, null=True, blank=True, unique=True)
     user_timezone = models.ForeignKey(Timezones, blank=True, null=True)
     biography = models.TextField(null=True, blank=True)
-    last_login = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return "%s's Profile Details" % self.user.username
