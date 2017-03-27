@@ -1,4 +1,5 @@
 {% extends '_layout.html' %}
+{% load humanize %}
 
 {% block title %}
 My Profile - {{ user.username }}
@@ -60,12 +61,14 @@ My Profile - {{ user.username }}
             <tr>
                 <th>Guild Name</th>
                 <th>Post Title</th>
+                <th>Created</th>
                 <th>Active</th>
             </tr>
             {% for item in my_recruitment_posts %}
                 <tr>
                     <td><a href="{% url 'update-recruitment-post' item.pk %}">{{ item.guild_name }}</a></td>
                     <td>{{ item.recruitment_title }}</td>
+                    <td>{{ item.create_date|naturaltime }}</td>
                     <td>{{ item.is_post_active }}</td>
                 </tr>
             {% endfor %}

@@ -5,29 +5,57 @@ Character Details - {{ character_info.character_link.character_name }}
 {% endblock %}
 
 {% block content %}
+<table class="table" background="{{ site_settings.wow_api_character_image_base_url }}{{ character_info.character_profile_image_url }}" background-repeat="no-repeat">
+    <tr>
+        <th>Name</th>
+        <td>{{ character_info.character_link.character_name }}</td>
+    </tr>
+    <tr>
+        <th>Class</th>
+        <td>{{ character_info.character_class }}</td>
+    </tr>
+    <tr>
+        <th>Race</th>
+        <td>{{ character_info.character_race }}</td>
+    </tr>
+    <tr>
+        <th>Level</th>
+        <td>{{ character_info.character_level }}</td>
+    </tr>
+    <tr>
+        <th>Faction</th>
+        <td>{{ character_info.character_faction }}</td>
+    </tr>
+    <tr>
+        <th>Main Spec</th>
+        <td>{{ character_info.get_main_role_display }}</td>
+    </tr>
+    <tr>
+        <th>Off Spec</th>
+        <td>{{ character_info.get_alt_role_display }}</td>
+    </tr>
+    <tr>
+        <th>Armory (simple)</th>
+        <td><a href="{{ character_info.character_armory_url_simple }}">Link</a></td>
+    </tr>
+    <tr>
+        <th>Armory (advanced)</th>
+        <td><a href="{{ character_info.character_armory_url_advanced }}">Link</a></td>
+    </tr>
+</table>
+{% if character_info.looking_for_guild %}
+<table class="table">
+    <tr>
+        <th>Looking For Guild Advertisement</th>
+    </tr>
+    <tr>
+        <td>{% if character_info.looking_for_guild_advertisement == "" %}No advertisement notes.{% else %}{{ character_info.looking_for_guild_advertisement }}{% endif %}</td>
+    </tr>
+</table>
+{% else %}
+    Not currently looking for a guild.
+{% endif %}
 
-    {{ character_info.get_main_role_display }}
-    <br>
-    {{ character_info.get_alt_role_display }}
-    <br>
-    {{ character_info.character_armory_url_simple }}
-    <br>
-    {{ character_info.character_armory_url_advanced }}
-    <br>
-    {{ character_info.character_class }}
-    <br>
-    {{ character_info.character_race }}
-    <br>
-    {{ character_info.character_level }}
-    <br>
-    {{ character_info.character_faction }}
-    <br>
-    Update {{ character_info.character_link.character_name }}'s Profile.
-    <a href="{% url 'update-character-details' character_info.id %}">Here!</a>
+<p>Update {{ character_info.character_link.character_name }}'s Profile <a href="{% url 'update-character-details' character_info.id %}">Here!</a></p>
 
-    <img src="{{ site_settings.wow_api_character_image_base_url }}{{ character_info.character_profile_image_url }}"></img>
-    <br>
-    <img src="{{ site_settings.wow_api_character_image_base_url }}{{ character_info.character_profile_avatar_url }}"></img>
-    <br>
-    <img src="{{ site_settings.wow_api_character_image_base_url }}{{ character_info.character_profile_inset_url }}"></img>
 {% endblock %}
