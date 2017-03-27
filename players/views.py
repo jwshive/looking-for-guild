@@ -94,6 +94,6 @@ class UpdateCharacterProfile(UpdateView):
 
 
 @login_required()
-def DeleteCharacter(request,pk):
-    Characters.objects.get(id=pk).delete()
+def DeleteCharacter(request, pk):
+    Characters.objects.get(pk=pk).delete()
     return redirect('/players/profile')
