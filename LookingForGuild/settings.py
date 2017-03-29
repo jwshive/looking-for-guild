@@ -175,3 +175,4 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_VALIDATORS = 'socialaccount.providers.battlenet.validators.BattletagUsernameValidator'
