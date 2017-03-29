@@ -4,19 +4,7 @@ from autoslug import AutoSlugField
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.contrib.auth.models import User
-from django.contrib.auth.validators import UnicodeUsernameValidator
 
-
-class MyValidator(UnicodeUsernameValidator):
-    regex = r"^[\w.]+#\d+$"
-
-
-class MyUser(User):
-    username_validator = MyValidator
-
-    class Meta:
-        proxy = True  # If no new field is added.
 
 ROLES = (
     ('MELEE_DPS', 'Melee DPS'),
