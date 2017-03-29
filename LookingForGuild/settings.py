@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.battlenet',
 ]
 
 MIDDLEWARE = [
@@ -142,5 +141,3 @@ AUTHENTICATION_BACKENDS = (
 SOCIALACCOUNT_PROVIDERS = {'battlenet': {'SCOPE': ['wow.profile', ], }}
 
 ACCOUNT_EMAIL_REQUIRED = True
-
-ACCOUNT_USERNAME_VALIDATORS = ('players.models.MyUser',)
