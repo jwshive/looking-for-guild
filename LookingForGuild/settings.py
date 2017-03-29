@@ -148,5 +148,6 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_VALIDATORS = 'allauth.socialaccount.providers.battlenet.validators.BattletagUsernameValidator'
+ACCOUNT_USERNAME_VALIDATORS = ('allauth.socialaccount.providers.battlenet.validators.BattletagUsernameValidator',)
+
 
