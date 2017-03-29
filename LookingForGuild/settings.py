@@ -139,15 +139,7 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-SOCIALACCOUNT_PROVIDERS = {
-    'battlenet': {
-        'SCOPE': [
-            'wow.profile'
-        ],
-    }
-}
+SOCIALACCOUNT_PROVIDERS = {'battlenet': {'SCOPE': ['wow.profile', ], }}
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_VALIDATORS = ('allauth.socialaccount.providers.battlenet.validators.BattletagUsernameValidator',)
-
-
