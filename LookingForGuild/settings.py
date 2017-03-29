@@ -45,9 +45,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-#    'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.battlenet',
-#    'allauth.socialaccount.providers.discord',
 ]
 
 MIDDLEWARE = [
@@ -90,23 +88,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
-# DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#    },
-#    'blizzard_api': {
-#        'HOST': 'localhost',
-#        'NAME': 'blizzard_api',
-#        'ENGINE': "django.db.backends.mysql",
-#        'USER': 'root',
-#        'PASSWORD': 'qqtr553n'
-#    }
-# }
-
-# DATABASE_ROUTERS = ['players.routers.BlizzardApiRouter', 'guilds.routers.BlizzardApiRouter']
-# DATABASE_APPS_MAPPING = {'blizzard_api': 'blizzard_api'}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -159,14 +140,6 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'SCOPE': [
-            'profile',
-        ],
-        'AUTH_PARAMS': {
-            'access_type': 'online',
-        }
-    },
     'battlenet': {
         'SCOPE': [
             'wow.profile'
@@ -175,5 +148,5 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_VALIDATORS = 'socialaccount.providers.battlenet.validators.BattletagUsernameValidator'
+ACCOUNT_USERNAME_VALIDATORS = 'allauth.socialaccount.providers.battlenet.validators.BattletagUsernameValidator'
 
