@@ -1,6 +1,6 @@
 from django.contrib import admin
+from django.contrib.admin import forms
 from .models import Characters, CharactersDetails, Classes, Factions, Realms, Races, Timezones, Regions, Profile
-from django.contrib.auth import forms
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
