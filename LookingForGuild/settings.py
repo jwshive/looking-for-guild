@@ -142,3 +142,5 @@ AUTHENTICATION_BACKENDS = (
 SOCIALACCOUNT_PROVIDERS = {'battlenet': {'SCOPE': ['wow.profile', ], }}
 
 ACCOUNT_EMAIL_REQUIRED = True
+
+ACCOUNT_USERNAME_VALIDATORS = ('players.models.MyUser',)
