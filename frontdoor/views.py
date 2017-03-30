@@ -1,12 +1,22 @@
-from django.views.generic import ListView, CreateView
-from .models import FrontDoorNews, Feedback
+from django.shortcuts import render
+from django.views.generic import CreateView
+from .models import FrontDoorNews, Feedback, WebsiteAPISettings
+from players.models import Characters
+import random
 
 
-class FrontDoorNewsView(ListView):
-    queryset = FrontDoorNews.objects.filter(news_published=True)
-    model = FrontDoorNews
-    template_name = 'frontdoor/index.html'
-    ordering = ['-news_creation_date']
+def FrontDoorNewsView(request):
+    all_character_ids = Characters.objects.filter(charactersdetails__looking_for_guild=True).values_list("id", flat=True)
+    print(all_character_ids)
+    random_idx = random.choice(all_character_ids)
+    print(random_idx)
+
+    context = {
+        'player_spotlight': Characters.objects.get(id=random_idx),
+        'news_blog': FrontDoorNews.objects.filter(news_published=True).order_by('-news_creation_date'),
+        'website_settings': WebsiteAPISettings.objects.get(pk=1)
+    }
+    return render(request, 'frontdoor/index.html', context)
 
 
 class FeedbackFormView(CreateView):

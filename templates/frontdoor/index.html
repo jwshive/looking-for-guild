@@ -10,7 +10,7 @@
   <!-- Example row of columns -->
   <div class="row">
     <div class="col-md-8">
-        {% for news_item in object_list %}
+        {% for news_item in news_blog %}
             <h2>{{ news_item.news_title }}</h2>
             <p>{{ news_item.news_author.get_full_name }} ({{ news_item.news_author }})</p>
             <p>{{ news_item.news_creation_date|naturaltime }}</p>
@@ -18,9 +18,12 @@
         {% endfor %}
     </div>
     <div class="col-md-4">
-      <h2>Heading</h2>
-      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-      <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+      <h2>Player Spotlight</h2>
+        {% for detail in player_spotlight.charactersdetails_set.all %}
+            <p><img src="{{ website_settings.wow_api_character_image_base_url }}{{ detail.character_profile_inset_url }}"></p>
+            <p>{{ player_spotlight.character_name }} - {{ detail.character_class }}{% if detail.main_role != "NO_ROLE_SELECTED" %} - {{ detail.get_main_role_display }}{% endif %}</p>
+            <p>{{ player_spotlight.character_realm }} - {{ detail.character_faction }}</p>
+        {% endfor %}
    </div>
   </div>
 {% endblock %}
