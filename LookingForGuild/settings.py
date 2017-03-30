@@ -158,3 +158,9 @@ SOCIALACCOUNT_PROVIDERS = {
 ACCOUNT_EMAIL_REQUIRED = True
 
 ACCOUNT_USERNAME_VALIDATORS = 'players.validators.validators_list'
+
+# To get the wow profile:
+# "https://us.api.battle.net/wow/user/characters?access_token=38qvyu2n6e4jvaxm4mrawvub"
+# where access_token is in the socialaccount tokens table.
+# from allauth.socialaccount.models import SocialToken
+# SocialToken.objects.filter(account__user=user, account__provider='battlenet')
