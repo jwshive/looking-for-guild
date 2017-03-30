@@ -11,6 +11,7 @@ class WebsiteAPISettings(models.Model):
     wow_api_character_image_base_url = models.URLField()
     wow_armory_base_url_simple = models.URLField()
     wow_armory_base_url_advanced = models.URLField()
+    wow_oauth_user_profile_url = models.URLField()
 
     class Meta:
         managed = True

@@ -11,6 +11,16 @@
   <div class="row">
     <div class="col-md-12">
         Adding character for {{ OwnerDetails.username }}
+        <br>
+        
+        {% for value in account_characters.items %}
+          {% for item in value %}
+          <p> <img src="{{ item.inset_image }}"></p>
+            <p> {{ item.character_name }} </p>
+            <p> {{ item.character_realm }} </p>
+          {% endfor %}
+        {% endfor %}
+
       <form method="post">
         {% csrf_token %}
       {{ form.as_p }}

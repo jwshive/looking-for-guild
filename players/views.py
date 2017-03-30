@@ -1,4 +1,4 @@
-from players.api_functions import get_character_api_information
+from players.api_functions import get_oauth_character_information, get_oauth_character_names
 from .models import Realms, Characters, Factions, Profile, CharactersDetails, Classes
 from guilds.models import RecruitmentPosts, Guilds
 from frontdoor.models import WebsiteAPISettings
@@ -6,6 +6,7 @@ from django.views.generic import UpdateView
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from players.forms import AddCharacterForm
+from allauth.socialaccount.models import SocialToken
 
 
 def MyProfile(request):
@@ -57,8 +58,11 @@ def CreateCharacter(request, character_owner):
             cdo.save()
             return redirect('user-profile')
     else:
+        AccessToken = SocialToken.objects.filter(account__user=request.user.id, account__provider='battlenet').get()
+        account_characters = get_oauth_character_names(AccessToken.token)
+        website_settings = WebsiteAPISettings.objects.get(pk=1)
         form = AddCharacterForm()
-    return render(request, 'players/add_character.html', {'form': form, 'OwnerDetails': OwnerDetails})
+    return render(request, 'players/add_character.html', {'website_settings': website_settings, 'form': form, 'OwnerDetails': OwnerDetails, 'account_characters': account_characters})
 
 
 class UpdateMyProfile(UpdateView):
