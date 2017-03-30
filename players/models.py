@@ -106,26 +106,29 @@ class Regions(models.Model):
         return self.region_name.upper()
 
 
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    battle_net_id = models.CharField(max_length=50, null=True, blank=True, unique=True)
-    user_timezone = models.ForeignKey(Timezones, blank=True, null=True)
-    biography = models.TextField(null=True, blank=True)
-
-    def __str__(self):
-        return "%s's Profile Details" % self.user.username
-
-
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
+#@receiver(post_save, sender=User)
+#def create_user_profile(sender, instance, created, **kwargs):
+#    if created:
+#        Profile.objects.create(user=instance)
 
 
 class Characters(models.Model):
     character_owner = models.ForeignKey(User)
     character_name = models.CharField(max_length=255)
     character_realm = models.ForeignKey(Realms)
+    character_faction = models.ForeignKey(Factions)
+    character_class = models.ForeignKey(Classes)
+    character_race = models.ForeignKey(Races)
+    character_level = models.IntegerField()
+    main_role = models.CharField(max_length=30, choices=ROLES, default="NO_ROLE_SELECTED", null=True, blank=True)
+    alt_role = models.CharField(max_length=30, choices=ROLES, default="NO_ROLE_SELECTED", null=True, blank=True)
+    looking_for_guild = models.BooleanField(default=False)
+    looking_for_guild_advertisement = models.TextField(null=True, blank=True)
+    character_armory_url_simple = models.URLField(null=True, blank=True)
+    character_armory_url_advanced = models.URLField(null=True, blank=True)
+    character_profile_image_url = models.CharField(max_length=100, null=True, blank=True)
+    character_profile_avatar_url = models.CharField(max_length=100, null=True, blank=True)
+    character_profile_inset_url = models.CharField(max_length=100, null=True, blank=True)
     insert_date = models.DateField(auto_now_add=True)
 
     class Meta:
@@ -137,34 +140,6 @@ class Characters(models.Model):
     def __str__(self):
         return "%s of %s" % (self.character_name, self.character_realm)
 
-
-class CharactersDetails(models.Model):
-    character_link = models.ForeignKey(Characters)
-    character_faction = models.ForeignKey(Factions)
-    character_class = models.ForeignKey(Classes, null=True, blank=True)
-    character_race = models.ForeignKey(Races, null=True, blank=True)
-    character_level = models.IntegerField(null=True, blank=True)
-    main_role = models.CharField(max_length=30, choices=ROLES, default="NO_ROLE_SELECTED", null=True, blank=True)
-    alt_role = models.CharField(max_length=30, choices=ROLES, default="NO_ROLE_SELECTED", null=True, blank=True)
-    looking_for_guild = models.BooleanField(default=False)
-    looking_for_guild_advertisement = models.TextField(null=True, blank=True)
-    character_armory_url_simple = models.URLField(null=True, blank=True)
-    character_armory_url_advanced = models.URLField(null=True, blank=True)
-    character_profile_image_url = models.CharField(max_length=100, null=True, blank=True)
-    character_profile_avatar_url = models.CharField(max_length=100, null=True, blank=True)
-    character_profile_inset_url = models.CharField(max_length=100, null=True, blank=True)
-    
-    class Meta:
-        managed = True
-        db_table = 'characters_details'
-        verbose_name_plural = 'Character Details'
-        
-    def __str__(self):
-        return "%s of %s (%s) Details" % (
-            self.character_link.character_name,
-            self.character_link.character_realm,
-            self.character_faction
-        )
 
     def create_character_slug(self):
         return "%s-%s-%s" % (
