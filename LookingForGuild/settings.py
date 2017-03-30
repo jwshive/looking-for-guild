@@ -143,5 +143,4 @@ SOCIALACCOUNT_PROVIDERS = {'battlenet': {'SCOPE': ['wow.profile', ], }}
 
 ACCOUNT_EMAIL_REQUIRED = True
 
-ACCOUNT_USERNAME_VALIDATORS = ('allauth.socialaccount.providers.battlenet.validators.BattletagUsernameValidator')
-#ACCOUNT_USERNAME_VALIDATORS = ('players.validators.CustomUsernameValidator')
+ACCOUNT_USERNAME_VALIDATORS = 'players.validators.CustomUsernameValidator'

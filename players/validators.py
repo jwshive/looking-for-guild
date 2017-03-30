@@ -12,3 +12,10 @@ class CustomUsernameValidator(object):
     def __call__(self, value):
         if not re.match(r"^[\w.]+#\d+$", value):
             raise ValidationError(self.message, code='invalid_username')
+
+
+def username_validators():
+    from allauth.socialaccount.providers.battlenet import validators
+    return [
+        validators.BattletagUsernameValidator
+    ]
