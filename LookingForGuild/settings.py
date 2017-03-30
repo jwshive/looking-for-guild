@@ -139,7 +139,21 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-#SOCIALACCOUNT_PROVIDERS = {'battlenet': {'SCOPE': ['wow.profile',],}}
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    },
+    'battlenet': {
+        'SCOPE': [
+            'wow.profile',
+        ],
+    },
+}
 
 ACCOUNT_EMAIL_REQUIRED = True
 
