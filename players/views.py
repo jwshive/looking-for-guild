@@ -39,6 +39,7 @@ def CreateCharacter(request):
         # Loop through full character list. 
         # Insert records for new characters that are in the api pull that aren't in the db
         new_character, created = Characters.objects.get_or_create(
+                character_owner_id = request.user.id,
                 character_name = character_info['character_name'].title(),
                 character_realm = Realms.objects.get(realm_name = character_info['character_realm']),
                 character_faction = Factions.objects.get(faction_id = character_info['character_faction']),
