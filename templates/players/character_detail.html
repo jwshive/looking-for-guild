@@ -1,14 +1,14 @@
 {% extends '_layout.html' %}
 
 {% block title %}
-Character Details - {{ character_info.character_link.character_name }}
+Character Details - {{ character_info.character_name }}
 {% endblock %}
 
 {% block content %}
 <table class="table" background="{{ site_settings.wow_api_character_image_base_url }}{{ character_info.character_profile_image_url }}" background-repeat="no-repeat">
     <tr>
         <th>Name</th>
-        <td>{{ character_info.character_link.character_name }}</td>
+        <td>{{ character_info.character_name }}</td>
     </tr>
     <tr>
         <th>Class</th>
@@ -36,11 +36,11 @@ Character Details - {{ character_info.character_link.character_name }}
     </tr>
     <tr>
         <th>Armory (simple)</th>
-        <td><a href="{{ character_info.character_armory_url_simple }}">Link</a></td>
+        <td><a href="{{ character_info.character_armory_url_simple }}" target="_blank">Link</a></td>
     </tr>
     <tr>
         <th>Armory (advanced)</th>
-        <td><a href="{{ character_info.character_armory_url_advanced }}">Link</a></td>
+        <td><a href="{{ character_info.character_armory_url_advanced }}" target="_blank">Link</a></td>
     </tr>
 </table>
 {% if character_info.looking_for_guild %}
@@ -56,6 +56,6 @@ Character Details - {{ character_info.character_link.character_name }}
     Not currently looking for a guild.
 {% endif %}
 
-<p>Update {{ character_info.character_link.character_name }}'s Profile <a href="{% url 'update-character-details' character_info.id %}">Here!</a></p>
+<p>Update {{ character_info.character_name }}'s Profile <a href="{% url 'update-character-details' character_info.id %}">Here!</a></p>
 
 {% endblock %}

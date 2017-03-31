@@ -6,7 +6,8 @@ import random
 
 
 def FrontDoorNewsView(request):
-    all_lfg_character_ids = Characters.objects.filter(looking_for_guild=True).values_list("id", flat=True)
+    character_filters = {'looking_for_guild': True, 'is_character_active': True}
+    all_lfg_character_ids = Characters.objects.filter(**character_filters).values_list("id", flat=True)
     try:
         random_idx = random.choice(all_lfg_character_ids)
         player_spotlight = Characters.objects.get(id=random_idx)

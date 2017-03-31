@@ -60,7 +60,7 @@ My Profile - {{ user.username }}
     <!--- Show Characters I've Created --->
     <h2>My Characters</h2>
 
-    <h4><a href="{% url 'add-character' user.id %}">Add or Update My Characters</a></h4>
+    <h4><a href="{% url 'add-character' %}">Add or Update My Characters</a></h4>
 
     <table class="table">
         <tr>
@@ -73,8 +73,8 @@ My Profile - {{ user.username }}
         {% for character in my_characters %}
             <tr>
                 <td><img src="{{ website_settings.wow_api_character_image_base_url }}/{{ character.character_profile_inset_url }}"></td>
-                <td><a href="{% url 'character-details' character.character_link.id %}">{{ character.character_link.character_name }}</a></td>
-                <td>{{ character.character_link.character_realm }}</td>
+                <td><a href="{% url 'character-details' character.id %}">{{ character.character_name }}</a></td>
+                <td>{{ character.character_realm }}</td>
                 <td>{{ character.character_faction}}</td>
                 <td>{{ character.character_class }}</td>
             </tr>

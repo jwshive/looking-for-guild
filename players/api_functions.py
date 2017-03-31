@@ -36,8 +36,6 @@ def get_oauth_character_names(access_token):
 
     toon_names = []
     realm_names = []
-    faction_names = []
-
     for result in data['characters']:
         toon_names.append(result['name'])
         realm_names.append(result['realm'])
@@ -46,35 +44,30 @@ def get_oauth_character_names(access_token):
 
     return characters
 
-
-def get_oauth_character_information(access_token):
+def get_full_character_information(toon_name, toon_realm):
 
     api_settings = WebsiteAPISettings.objects.get(pk=1)
 
-    api_pull_url = api_settings.wow_oauth_user_profile_url + access_token
+    api_pull_url = api_settings.wow_api_base_url + toon_realm.replace('\'', '\\\'').replace(' ', '%20') + "/" + toon_name + "?fields=" + api_settings.wow_api_character_url_fields + "&local=en_US&apikey=" + api_settings.wow_api_key
     
     response = urlopen(api_pull_url)
     reader = codecs.getreader('utf-8')
     data = json.load(reader(response))
 
     try:
-        character_name = data['characters']['name']
-        character_realm = data['characters']['realm']
-        avatar_image = data['characters']['thumbnail']
+        character_name = data['name']
+        character_realm = data['realm']
+        character_faction = data['faction']
+        avatar_image = data['thumbnail']
         profile_image = avatar_image.replace('avatar', 'profilemain')
         inset_image = avatar_image.replace('avatar', 'inset')
 
-        class_id = data['characters']['class']
-        race_id = data['characters']['race']
-        level = data['characters']['level']
+        class_id = data['class']
+        race_id = data['race']
+        level = data['level']
 
-        spec = data['characters']['spec']['name']
-        spec_role = data['characters']['spec']['role']
-
-        armory_simple = api_settings.wow_armory_base_url_simple % (server_name, character_name)
-        armory_advanced = api_settings.wow_armory_base_url_advanced % (server_name, character_name)
-
-        character_faction = get_character_faction(character_name, character_realm)
+        armory_simple = api_settings.wow_armory_base_url_simple % (toon_realm, toon_name)
+        armory_advanced = api_settings.wow_armory_base_url_advanced % (toon_realm, toon_name)
 
         return {
                 'character_name': character_name,
@@ -88,9 +81,7 @@ def get_oauth_character_information(access_token):
                 'armory_simple': armory_simple or "",
                 'armory_advanced': armory_advanced or "",
                 'character_faction': character_faction,
-                'spec': spec,
-                'spec_role': spec_role,
                 'api_pull_url': api_pull_url,
                 }
     except KeyError:
-        return False
+        return api_pull_url, data

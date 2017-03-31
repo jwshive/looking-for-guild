@@ -129,6 +129,7 @@ class Characters(models.Model):
     character_profile_image_url = models.CharField(max_length=100, null=True, blank=True)
     character_profile_avatar_url = models.CharField(max_length=100, null=True, blank=True)
     character_profile_inset_url = models.CharField(max_length=100, null=True, blank=True)
+    is_character_active = models.BooleanField(default=True)
     insert_date = models.DateField(auto_now_add=True)
 
     class Meta:
