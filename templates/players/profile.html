@@ -7,26 +7,6 @@ My Profile - {{ user.username }}
 
 {% block content %}
 
-    <!--- My Profile --->
-    <h2>My Profile</h2>
-    <h4><a href="{% url 'update-profile' my_profile.profile.id  %}">Update My Profile</a></h4>
-
-    <table class="table">
-        <tr>
-            <th>Battle Tag</th>
-            <td>{% if my_profile.profile.battle_net_id %}{{ my_profile.profile.battle_net_id }}{% else %} Update your profile to set a BattleNet ID.{% endif %}</td>
-        </tr>
-        <tr>
-            <th>Timezone</th>
-            <td>{% if my_profile.profile.user_timezone %}{{ my_profile.profile.user_timezone }}{% else %}Update your profile to set your Timezone.{% endif %}</td>
-        </tr>
-        <tr>
-            <th>Biography</th>
-            <td>{% if my_profile.profile.biography %}{{ my_profile.profile.biography }}{% else %}Update your profile to fill out your game history.{% endif %}</td>
-        </tr>
-    </table>
-
-
     <!--- Show Guilds I Own --->
     <h2>My Guilds</h2>
 
@@ -80,7 +60,7 @@ My Profile - {{ user.username }}
     <!--- Show Characters I've Created --->
     <h2>My Characters</h2>
 
-    <h4><a href="{% url 'add-character' user.id %}">Add a new Character</a></h4>
+    <h4><a href="{% url 'add-character' user.id %}">Add or Update My Characters</a></h4>
 
     <table class="table">
         <tr>

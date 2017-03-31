@@ -34,11 +34,15 @@ def get_oauth_character_names(access_token):
     reader = codecs.getreader('utf-8')
     data = json.load(reader(response))
 
-    characters = {}
+    toon_names = []
+    realm_names = []
+    faction_names = []
 
     for result in data['characters']:
-        new_dict = {'character_name': result['name'], 'character_realm': result['realm'], 'inset_image': api_settings.wow_api_character_image_base_url + result['thumbnail'].replace('avatar', 'inset')}
-        characters[result['name']] = new_dict
+        toon_names.append(result['name'])
+        realm_names.append(result['realm'])
+
+    characters = list(zip(toon_names, realm_names))
 
     return characters
 
