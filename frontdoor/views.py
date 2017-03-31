@@ -6,13 +6,15 @@ import random
 
 
 def FrontDoorNewsView(request):
-    all_character_ids = Characters.objects.filter(charactersdetails__looking_for_guild=True).values_list("id", flat=True)
-    print(all_character_ids)
-    random_idx = random.choice(all_character_ids)
-    print(random_idx)
+    all_lfg_character_ids = Characters.objects.filter(looking_for_guild=True).values_list("id", flat=True)
+    try:
+        random_idx = random.choice(all_lfg_character_ids)
+        player_spotlight = Characters.objects.get(id=random_idx)
+    except IndexError:
+        player_spotlight = False
 
     context = {
-        'player_spotlight': Characters.objects.get(id=random_idx),
+        'player_spotlight': player_spotlight,
         'news_blog': FrontDoorNews.objects.filter(news_published=True).order_by('-news_creation_date'),
         'website_settings': WebsiteAPISettings.objects.get(pk=1)
     }

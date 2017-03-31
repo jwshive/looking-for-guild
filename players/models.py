@@ -140,10 +140,9 @@ class Characters(models.Model):
     def __str__(self):
         return "%s of %s" % (self.character_name, self.character_realm)
 
-
     def create_character_slug(self):
         return "%s-%s-%s" % (
-            self.character_link.character_name.lower(),
-            self.character_link.character_realm.realm_name.lower().replace(' ', '-'),
+            self.character_name.lower(),
+            self.character_realm.realm_name.lower().replace(' ', '-'),
             self.character_faction.faction_name.lower()
         )

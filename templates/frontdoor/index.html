@@ -19,11 +19,15 @@
     </div>
     <div class="col-md-4">
       <h2>Player Spotlight</h2>
-        {% for detail in player_spotlight.charactersdetails_set.all %}
-            <p><img src="{{ website_settings.wow_api_character_image_base_url }}{{ detail.character_profile_inset_url }}"></p>
-            <p>{{ player_spotlight.character_name }} - {{ detail.character_class }}{% if detail.main_role != "NO_ROLE_SELECTED" %} - {{ detail.get_main_role_display }}{% endif %}</p>
-            <p>{{ player_spotlight.character_realm }} - {{ detail.character_faction }}</p>
-        {% endfor %}
+        {% if player_spotlight %}
+            {% for detail in player_spotlight.charactersdetails_set.all %}
+                <p><img src="{{ website_settings.wow_api_character_image_base_url }}{{ detail.character_profile_inset_url }}"></p>
+                <p>{{ player_spotlight.character_name }} - {{ detail.character_class }}{% if detail.main_role != "NO_ROLE_SELECTED" %} - {{ detail.get_main_role_display }}{% endif %}</p>
+                <p>{{ player_spotlight.character_realm }} - {{ detail.character_faction }}</p>
+            {% endfor %}
+        {% else %}
+            <p>Currently nobody is looking for a guild!</p>
+        {% endif %}
    </div>
   </div>
 {% endblock %}
