@@ -8,7 +8,7 @@ class Guilds(models.Model):
     guild_realm = models.ForeignKey(Realms)
     guild_faction = models.ForeignKey(Factions)
     guild_created_by = models.ForeignKey(User)
-    guild_information = models.TextField()
+    guild_information = models.TextField(null=True, blank=True)
     guild_battlenet_website = models.URLField(null=True, blank=True)
     guild_external_website = models.URLField(null=True, blank=True)
     guild_wow_progress_link = models.URLField(null=True, blank=True)

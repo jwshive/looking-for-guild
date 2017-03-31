@@ -2,6 +2,7 @@ from urllib.request import urlopen
 import json
 import codecs
 from frontdoor.models import WebsiteAPISettings
+from players.models import Realms
 
 
 def get_character_faction(character_name, server_name):
@@ -83,5 +84,32 @@ def get_full_character_information(toon_name, toon_realm):
                 'character_faction': character_faction,
                 'api_pull_url': api_pull_url,
                 }
+    except KeyError:
+        return api_pull_url, data
+
+
+def get_guild_information(guild_name, guild_realm_id):
+
+    guild_realm = Realms.objects.get(id=guild_realm_id)
+    api_settings = WebsiteAPISettings.objects.get(pk=1)
+
+    api_pull_url = api_settings.wow_api_base_url_guild + guild_realm.realm_name.lower().replace('\'', '\\\'').replace(' ', '%20') + "/" + guild_name + "?locale=en_US&apikey=" + api_settings.wow_api_key
+
+    response = urlopen(api_pull_url)
+    reader = codecs.getreader('utf-8')
+    data = json.load(reader(response))
+
+    try:
+        guild_name = data['name']
+        guild_realm = data['realm']
+        guild_faction = data['side']
+
+        return {
+                'guild_name': guild_name,
+                'guild_realm': guild_realm_id,
+                'guild_faction': guild_faction,
+                }
+
+
     except KeyError:
         return api_pull_url, data

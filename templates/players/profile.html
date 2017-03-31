@@ -10,7 +10,7 @@ My Profile - {{ user.username }}
     <!--- Show Guilds I Own --->
     <h2>My Guilds</h2>
 
-    <h4><a href="{% url 'add-guild' user.id %}">Add a new Guild</a></h4>
+    <h4><a href="{% url 'add-guild' %}">Add a new Guild</a></h4>
     {% if my_guilds %}
         <table class="table">
             <tr>
@@ -22,7 +22,7 @@ My Profile - {{ user.username }}
             </tr>
             {% for guild in my_guilds %}
                 <tr>
-                    <td></td>
+                    <td><a href="{% url 'update-guild-profile' guild.id %}">Update Guild Information</a></td>
                     <td><a href="{% url 'guild-detail' guild.id %}">{{ guild.guild_name }}</a></td>
                     <td>{{ guild.guild_realm }}</td>
                     <td>{{ guild.guild_faction }}</td>

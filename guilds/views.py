@@ -1,8 +1,11 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect
+from django.contrib.auth.models import User
+from django.shortcuts import redirect, render
 from django.views.generic import UpdateView
-
+from .forms import CreateGuildForm
 from .models import Guilds, RecruitmentPosts
+from players.models import Realms, Factions
+from players.api_functions import get_guild_information
 from django.views.generic import ListView, CreateView, DetailView
 
 
@@ -24,10 +27,32 @@ class RecruitmentPostDetail(DetailView):
     template_name = 'guilds/recruitment_post_details.html'
     
     
-class CreateGuild(CreateView):
-    model = Guilds
-    template_name = 'guilds/add_guild.html'
-    fields = ['guild_name', 'guild_realm', 'guild_faction', 'guild_information', 'guild_battlenet_website', 'guild_external_website', 'guild_wow_progress_link', 'guild_warcraft_logs_link', 'guild_world_of_logs_link', 'is_recruiting']
+def CreateGuild(request):
+    form = CreateGuildForm()
+
+    if request.method == 'POST':
+        form = CreateGuildForm(data=request.POST)
+        if form.is_valid():
+            guild_information_from_api = get_guild_information(request.POST['guild_name'], request.POST['guild_realm'])
+
+            new_guild, created = Guilds.objects.get_or_create(
+                    guild_name = guild_information_from_api['guild_name'],
+                    guild_realm = Realms.objects.get(id=guild_information_from_api['guild_realm']),
+                    guild_faction = Factions.objects.get(faction_id = guild_information_from_api['guild_faction']),
+                    guild_created_by = User.objects.get(id=request.user.id),
+                    )
+
+            return redirect('user-profile')
+        else:
+
+            return render(request, 'guilds/add_guild.html', {'form': form})
+            
+    else:
+        return render(request, 'guilds/add_guild.html', {'form': form})
+
+
+    fields = ['guild_name', 'guild_realm', 'guild_faction']
+    #fields = ['guild_name', 'guild_realm', 'guild_faction', 'guild_information', 'guild_battlenet_website', 'guild_external_website', 'guild_wow_progress_link', 'guild_warcraft_logs_link', 'guild_world_of_logs_link', 'is_recruiting']
     success_url = '/players/profile'
 
     def form_valid(self, form):
