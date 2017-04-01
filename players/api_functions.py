@@ -6,7 +6,7 @@ from players.models import Realms
 
 
 def get_character_faction(character_name, server_name):
-    server_name = server_name.replace('\'', '\\\'').replace(' ', '%20')
+    server_name = server_name.replace(' ', '%20')
 
     api_settings = WebsiteAPISettings.objects.get(pk=1)
 
@@ -49,7 +49,7 @@ def get_full_character_information(toon_name, toon_realm):
 
     api_settings = WebsiteAPISettings.objects.get(pk=1)
 
-    api_pull_url = api_settings.wow_api_base_url + toon_realm.replace('\'', '\\\'').replace(' ', '%20') + "/" + toon_name + "?fields=" + api_settings.wow_api_character_url_fields + "&local=en_US&apikey=" + api_settings.wow_api_key
+    api_pull_url = api_settings.wow_api_base_url + toon_realm.replace(' ', '%20') + "/" + toon_name + "?fields=" + api_settings.wow_api_character_url_fields + "&local=en_US&apikey=" + api_settings.wow_api_key
     
     response = urlopen(api_pull_url)
     reader = codecs.getreader('utf-8')
@@ -93,7 +93,7 @@ def get_guild_information(guild_name, guild_realm_id):
     guild_realm = Realms.objects.get(id=guild_realm_id)
     api_settings = WebsiteAPISettings.objects.get(pk=1)
 
-    api_pull_url = api_settings.wow_api_base_url_guild + guild_realm.realm_name.lower().replace('\'', '\\\'').replace(' ', '%20') + "/" + guild_name + "?locale=en_US&apikey=" + api_settings.wow_api_key
+    api_pull_url = api_settings.wow_api_base_url_guild + guild_realm.realm_name.lower().replace(' ', '%20') + "/" + guild_name + "?locale=en_US&apikey=" + api_settings.wow_api_key
 
     response = urlopen(api_pull_url)
     reader = codecs.getreader('utf-8')
