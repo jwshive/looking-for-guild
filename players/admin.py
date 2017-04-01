@@ -15,7 +15,7 @@ class RealmAdmin(admin.ModelAdmin):
 
 
 class CharacterAdmin(admin.ModelAdmin):
-    list_display = ('character_name', 'character_realm', 'character_owner', 'is_character_active', 'looking_for_guild')
+    list_display = ('character_name', 'character_realm', 'character_owner', 'character_level', 'is_character_active', 'looking_for_guild')
 
 
 

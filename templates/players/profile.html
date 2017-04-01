@@ -69,6 +69,7 @@ My Profile - {{ user.username }}
             <th>Realm</th>
             <th>Faction</th>
             <th>Class</th>
+            <th>Level</th>
         </tr>
         {% for character in my_characters %}
             <tr>
@@ -77,6 +78,7 @@ My Profile - {{ user.username }}
                 <td>{{ character.character_realm }}</td>
                 <td>{{ character.character_faction}}</td>
                 <td>{{ character.character_class }}</td>
+                <td>{{ character.character_level }}</td>
             </tr>
         {% endfor %}
     </table>

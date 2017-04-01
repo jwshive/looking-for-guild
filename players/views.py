@@ -6,6 +6,7 @@ from django.views.generic import UpdateView
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from allauth.socialaccount.models import SocialToken
+from django.db import IntegrityError
 
 
 def MyProfile(request):
@@ -38,20 +39,30 @@ def CreateCharacter(request):
         character_info = get_full_character_information(toon_name, toon_realm)
         # Loop through full character list. 
         # Insert records for new characters that are in the api pull that aren't in the db
-        new_character, created = Characters.objects.get_or_create(
-                character_owner_id = request.user.id,
-                character_name = character_info['character_name'].title(),
-                character_realm = Realms.objects.get(realm_name = character_info['character_realm']),
-                character_faction = Factions.objects.get(faction_id = character_info['character_faction']),
-                character_class = Classes.objects.get(blizzard_class_id = character_info['class_id']),
-                character_race = Races.objects.get(race_id = character_info['race_id']), 
-                character_level = character_info['level'], 
-                character_armory_url_simple = character_info['armory_simple'], 
-                character_armory_url_advanced = character_info['armory_advanced'], 
-                character_profile_image_url = character_info['profile_image'], 
-                character_profile_avatar_url = character_info['avatar_image'], 
-                character_profile_inset_url = character_info['inset_image'], 
-                )
+        try:
+            new_character, created = Characters.objects.update_or_create(
+                    character_owner_id = request.user.id,
+                    character_name = character_info['character_name'].title(),
+                    character_realm = Realms.objects.get(realm_name = character_info['character_realm']),
+                    character_faction = Factions.objects.get(faction_id = character_info['character_faction']),
+                    character_class = Classes.objects.get(blizzard_class_id = character_info['class_id']),
+                    character_race = Races.objects.get(race_id = character_info['race_id']), 
+                    character_level = character_info['level'], 
+                    character_armory_url_simple = character_info['armory_simple'], 
+                    character_armory_url_advanced = character_info['armory_advanced'], 
+                    character_profile_image_url = character_info['profile_image'], 
+                    character_profile_avatar_url = character_info['avatar_image'], 
+                    character_profile_inset_url = character_info['inset_image'], 
+                    defaults = {'character_level': character_info['level']}
+                    )
+        except IntegrityError:
+            Characters.objects.filter(
+                    character_owner_id = request.user.id, 
+                    character_name = character_info['character_name'], 
+                    character_realm = Realms.objects.get(realm_name = character_info['character_realm'])
+                    ).update(
+                            character_level = character_info['level']
+                            )
 
     # Leave old characters for users to deactivate
     # Get all toons for this player
