@@ -70,6 +70,9 @@ def get_full_character_information(toon_name, toon_realm):
         armory_simple = api_settings.wow_armory_base_url_simple % (toon_realm, toon_name)
         armory_advanced = api_settings.wow_armory_base_url_advanced % (toon_realm, toon_name)
 
+        equipped_ilevel = data['items']['averageItemLevelEquipped']
+        max_ilevel = data['items']['averageItemLevel']
+
         return {
                 'character_name': character_name,
                 'character_realm': character_realm,
@@ -82,6 +85,8 @@ def get_full_character_information(toon_name, toon_realm):
                 'armory_simple': armory_simple or "",
                 'armory_advanced': armory_advanced or "",
                 'character_faction': character_faction,
+                'equipped_ilevel': equipped_ilevel,
+                'max_ilevel': max_ilevel,
                 'api_pull_url': api_pull_url,
                 }
     except KeyError:
@@ -93,7 +98,7 @@ def get_guild_information(guild_name, guild_realm_id):
     guild_realm = Realms.objects.get(id=guild_realm_id)
     api_settings = WebsiteAPISettings.objects.get(pk=1)
 
-    api_pull_url = api_settings.wow_api_base_url_guild + guild_realm.realm_name.lower().replace(' ', '%20') + "/" + guild_name + "?locale=en_US&apikey=" + api_settings.wow_api_key
+    api_pull_url = api_settings.wow_api_base_url_guild + guild_realm.realm_name.lower().replace(' ', '%20') + "/" + guild_name.replace(' ', '%20') + "?locale=en_US&apikey=" + api_settings.wow_api_key
 
     response = urlopen(api_pull_url)
     reader = codecs.getreader('utf-8')

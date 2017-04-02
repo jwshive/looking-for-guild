@@ -48,12 +48,19 @@ def CreateCharacter(request):
                     character_class = Classes.objects.get(blizzard_class_id = character_info['class_id']),
                     character_race = Races.objects.get(race_id = character_info['race_id']), 
                     character_level = character_info['level'], 
+                    equipped_ilevel = character_info['equipped_ilevel'],
+                    max_ilevel = character_info['max_ilevel'],
                     character_armory_url_simple = character_info['armory_simple'], 
                     character_armory_url_advanced = character_info['armory_advanced'], 
                     character_profile_image_url = character_info['profile_image'], 
                     character_profile_avatar_url = character_info['avatar_image'], 
                     character_profile_inset_url = character_info['inset_image'], 
-                    defaults = {'character_level': character_info['level'], 'character_race': Races.objects.get(race_id = character_info['race_id']) }
+                    defaults = {
+                        'character_level': character_info['level'], 
+                        'character_race': Races.objects.get(race_id = character_info['race_id']),
+                        'equipped_ilevel': character_info['equipped_ilevel'],
+                        'max_ilevel': character_info['max_ilevel'],
+                        }
                     )
         except IntegrityError:
             Characters.objects.filter(
@@ -63,6 +70,8 @@ def CreateCharacter(request):
                     ).update(
                             character_level = character_info['level'],
                             character_race = Races.objects.get(race_id = character_info['race_id']),
+                            equipped_ilevel = character_info['equipped_ilevel'],
+                            max_ilevel = character_info['max_ilevel'],
                             )
 
     # Leave old characters for users to deactivate

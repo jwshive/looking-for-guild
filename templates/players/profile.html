@@ -70,6 +70,7 @@ My Profile - {{ user.username }}
             <th>Faction</th>
             <th>Class</th>
             <th>Level</th>
+            <th>iLevel Equipped / iLevel Max</th>
         </tr>
         {% for character in my_characters %}
             <tr>
@@ -79,6 +80,7 @@ My Profile - {{ user.username }}
                 <td>{{ character.character_faction}}</td>
                 <td>{{ character.character_class }}</td>
                 <td>{{ character.character_level }}</td>
+                <td>{{ character.equipped_ilevel }} / {{ character.max_ilevel }}</td>
             </tr>
         {% endfor %}
     </table>

@@ -120,6 +120,8 @@ class Characters(models.Model):
     character_class = models.ForeignKey(Classes)
     character_race = models.ForeignKey(Races)
     character_level = models.IntegerField()
+    equipped_ilevel = models.IntegerField()
+    max_ilevel = models.IntegerField()
     main_role = models.CharField(max_length=30, choices=ROLES, default="NO_ROLE_SELECTED", null=True, blank=True)
     alt_role = models.CharField(max_length=30, choices=ROLES, default="NO_ROLE_SELECTED", null=True, blank=True)
     looking_for_guild = models.BooleanField(default=False)
