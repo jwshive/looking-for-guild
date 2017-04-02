@@ -53,7 +53,7 @@ def CreateCharacter(request):
                     character_profile_image_url = character_info['profile_image'], 
                     character_profile_avatar_url = character_info['avatar_image'], 
                     character_profile_inset_url = character_info['inset_image'], 
-                    defaults = {'character_level': character_info['level']}
+                    defaults = {'character_level': character_info['level'], 'character_race': Races.objects.get(race_id = character_info['race_id']) }
                     )
         except IntegrityError:
             Characters.objects.filter(
@@ -61,7 +61,8 @@ def CreateCharacter(request):
                     character_name = character_info['character_name'], 
                     character_realm = Realms.objects.get(realm_name = character_info['character_realm'])
                     ).update(
-                            character_level = character_info['level']
+                            character_level = character_info['level'],
+                            character_race = Races.objects.get(race_id = character_info['race_id']),
                             )
 
     # Leave old characters for users to deactivate
