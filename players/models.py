@@ -5,9 +5,6 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-# TODO: Move timezone from Profile to Character.
-# TODO: Get rid of Profile model
-# TODO: Merge Characters and CharactersDetails
 
 ROLES = (
     ('MELEE_DPS', 'Melee DPS'),
