@@ -14,7 +14,7 @@ def MyProfile(request):
     context = {
         'my_guilds': Guilds.objects.filter(guild_created_by=request.user),
         'my_recruitment_posts': RecruitmentPosts.objects.select_related('guild_name').filter(guild_name__guild_created_by=request.user),
-        'my_characters': Characters.objects.filter(**character_filters).order_by('character_realm'),
+        'my_characters': Characters.objects.filter(**character_filters).order_by('character_realm', 'character_name'),
         'website_settings': WebsiteAPISettings.objects.get(pk=1),
     }
     return render(request, 'players/profile.html', context)
@@ -35,10 +35,22 @@ def CreateCharacter(request):
     AccessToken = SocialToken.objects.filter(account__user=request.user.id, account__provider='battlenet').get()
     # Get all characters from api build a list from the api of character|realm
     full_character_list_from_api = get_oauth_character_names(AccessToken.token)
+    # Get list of characters/realms from DB, compare to list from api, delete from db what isn't in api
+    my_db_toons = Characters.objects.filter(character_owner_id=request.user.id).values('character_name', 'character_realm__realm_name')
+    toons_list = []
+    for x in my_db_toons:
+        toons_list.append( (x['character_name'], x['character_realm__realm_name']) )
+    differences = [x for x in toons_list if x not in full_character_list_from_api]
+    # Take the items in differences, and delete them from the db.
+    for item in differences:
+        Characters.objects.filter(character_owner_id=request.user.id).filter(character_name=item[0]).filter(character_realm__realm_name=item[1]).delete()
+    # Done with the deletion stage.
+    
+    # Loop through full character list. 
+    # Insert records for new characters that are in the api pull that aren't in the db
+    # If a character is already in the db but has an updated level, race, or ilevel, update them.
     for toon_name, toon_realm in full_character_list_from_api:
         character_info = get_full_character_information(toon_name, toon_realm)
-        # Loop through full character list. 
-        # Insert records for new characters that are in the api pull that aren't in the db
         try:
             new_character, created = Characters.objects.update_or_create(
                     character_owner_id = request.user.id,
