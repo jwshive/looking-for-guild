@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from django.views.generic import UpdateView
 from .forms import CreateGuildForm
-from .models import Guilds, RecruitmentPosts
+from .models import Guilds, RecruitmentPosts, GuildManagers
 from players.models import Realms, Factions
 from players.api_functions import get_guild_information
 from django.views.generic import ListView, CreateView, DetailView
@@ -41,6 +41,8 @@ def CreateGuild(request):
                     guild_faction = Factions.objects.get(faction_id = guild_information_from_api['guild_faction']),
                     guild_created_by = User.objects.get(id=request.user.id),
                     )
+            new_guild_manager = GuildManagers.objects.create(guild_id = Guilds.objects.get(id = new_guild.id))
+            new_guild_manager.guild_manager.add(request.user.id)
 
             return redirect('user-profile')
         else:

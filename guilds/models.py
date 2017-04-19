@@ -30,6 +30,20 @@ class Guilds(models.Model):
         return self.guild_name
 
 
+class GuildManagers(models.Model):
+    guild_id = models.ForeignKey(Guilds, on_delete=models.CASCADE)
+    guild_manager = models.ManyToManyField(User)
+
+    class Meta:
+        managed = True
+        db_table = 'guild_managers'
+        verbose_name_plural = 'Guild Managers'
+        ordering =['guild_id']
+
+    def __str__(self):
+        return "%s - %s - %s" % (self.guild_id, self.guild_id.guild_realm.realm_name, self.guild_id.guild_faction.faction_name)
+
+
 class RecruitmentPosts(models.Model):
     guild_name = models.ForeignKey(Guilds)
     recruiting_levels = models.CharField(max_length=100)

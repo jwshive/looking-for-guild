@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Guilds, RecruitmentPosts
+from .models import Guilds, RecruitmentPosts, GuildManagers
 
 
 class GuildAdmin(admin.ModelAdmin):
@@ -12,4 +12,5 @@ class RecruitmentPostAdmin(admin.ModelAdmin):
 
 admin.site.register(Guilds, GuildAdmin)
 admin.site.register(RecruitmentPosts, RecruitmentPostAdmin)
+admin.site.register(GuildManagers)
 
