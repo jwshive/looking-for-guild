@@ -20,9 +20,29 @@
     <div class="col-md-4">
       <h2>Player Spotlight</h2>
         {% if player_spotlight %}
-            <p><img src="{{ website_settings.wow_api_character_image_base_url }}{{ player_spotlight.character_profile_inset_url }}"></p>
-            <p>{{ player_spotlight.character_name }} - {{ player_spotlight.character_class }}{% if player_spotlight.main_role != "NO_ROLE_SELECTED" %} - {{ player_spotlight.get_main_role_display }}{% endif %}</p>
-            <p>{{ player_spotlight.character_realm }} - {{ player_spotlight.character_faction }}</p>
+        <p><a href="{% url 'character-details' player_spotlight.id %}"><img src="{{ website_settings.wow_api_character_image_base_url }}{{ player_spotlight.character_profile_inset_url }}"></a></p>
+            <table>
+                <tr>
+                    <th>Character Name</th>
+                    <td>{{ player_spotlight.character_name }}</td>
+                </tr>
+                <tr>
+                    <th>Character Class</th>
+                    <td>{{ player_spotlight.character_class }}</td>
+                </tr>
+                <tr>
+                    <th>Character Role</th>
+                    <td>{% if player_spotlight.main_role != "NO_ROLE_SELECTED" %}{{ player_spotlight.get_main_role_display }}{% else %} No Role Selected{% endif %}</td>
+                </tr>
+                <tr>
+                    <th>Character Realm</th>
+                    <td>{{ player_spotlight.character_realm }}</td>
+                </tr>
+                <tr>
+                    <th>Character Faction</th>
+                    <td>{{ player_spotlight.character_faction }}</td>
+                </tr>
+            </table>
         {% else %}
             <p>Currently nobody is looking for a guild!</p>
         {% endif %}
