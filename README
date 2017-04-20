@@ -6,4 +6,7 @@ Players should look the same
 
 Change the Character and Guild update pages to have a more pretty url like with character and guild details.
 override the get_object method for updateview
+
+Try to use bootstrap modals for the "Add or Update my Characters" link
+
 Each of these, region, faction, server are searchable.
