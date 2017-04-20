@@ -17,9 +17,9 @@ class GuildList(ListView):
     grouping = ['guild_realm']
 
 
-class GuildDetail(DetailView):
-    model = Guilds
-    template_name = 'guilds/guild_details.html'
+def GuildDetail(request, guild_realm, guild_name):
+    context = {'guild_info': Guilds.objects.filter(guild_name = guild_name).filter(guild_realm = Realms.objects.get(realm_name = guild_realm))}
+    return render(request, 'guilds/guild_details.html', context)
 
     
 class RecruitmentPostDetail(DetailView):

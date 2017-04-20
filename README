@@ -4,5 +4,6 @@ Set it up so recruitment posts show like:
 Players should look the same
 [US] [Alliance] [Stormrage] Player Name - if recruitment_post, Post Title., else nothing
 
-
+Change the Character and Guild update pages to have a more pretty url like with character and guild details.
+override the get_object method for updateview
 Each of these, region, faction, server are searchable.

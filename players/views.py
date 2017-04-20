@@ -20,10 +20,12 @@ def MyProfile(request):
     return render(request, 'players/profile.html', context)
 
 
-def CharacterDetail(request, pk):
+def CharacterDetail(request, character_realm, character_name):
+#def CharacterDetail(request, pk):
     context = {
         'site_settings': WebsiteAPISettings.objects.all().get(),
-        'character_info': Characters.objects.get(pk=pk)
+        'character_info': Characters.objects.filter(character_name = character_name).filter(character_realm = Realms.objects.get(realm_name = character_realm))
+        #'character_info': Characters.objects.get(pk=pk)
     }
     return render(request, 'players/character_detail.html', context)
 
@@ -88,7 +90,7 @@ def CreateCharacter(request):
 
     # Leave old characters for users to deactivate
     # Get all toons for this player
-    account_characters = Characters.objects.filter(character_owner = request.user)
+    #account_characters = Characters.objects.filter(character_owner = request.user)
     return redirect('user-profile')
 
 

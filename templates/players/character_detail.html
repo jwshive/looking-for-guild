@@ -1,10 +1,10 @@
 {% extends '_layout.html' %}
-
 {% block title %}
-Character Details - {{ character_info.character_name }}
+Character Details - {% for character_info in character_info %} {{ character_info.character_name }} {% endfor %}
 {% endblock %}
 
 {% block content %}
+{% for character_info in character_info %}
 <table class="table" background="{{ site_settings.wow_api_character_image_base_url }}{{ character_info.character_profile_image_url }}" background-repeat="no-repeat">
     <tr>
         <th>Name</th>
@@ -60,6 +60,8 @@ Character Details - {{ character_info.character_name }}
     Not currently looking for a guild.
 {% endif %}
 
-<p>Update {{ character_info.character_name }}'s Profile <a href="{% url 'update-character-details' character_info.id %}">Here!</a></p>
-
+{% if character_info.character_owner.id == request.user.id  %}
+    <p>Update {{ character_info.character_name }}'s Profile <a href="{% url 'update-character-details' character_info.id %}">Here!</a></p>
+{% endif %}
+{% endfor %}
 {% endblock %}

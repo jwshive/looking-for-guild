@@ -1,53 +1,52 @@
 {% extends '_layout.html' %}
 
 {% block title %}
-Details for {{ object.guild_name }}
+Details for {% for guild_info in guild_info %} {{ guild_info.guild_name }} {% endfor %}
 {% endblock %}
 
 {% block content %}
-    Delete this guild => <a href="{% url 'delete-guild' object.id %}">Delete {{ object.guild_name }} - {{ object.guild_realm }} - {{ object.guild_faction }}</a><= This happens immediately.
+{% for guild_info in guild_info %}
+    Delete this guild => <a href="{% url 'delete-guild' guild_info.id %}">Delete {{ guild_info.guild_name }} - {{ guild_info.guild_realm }} - {{ guild_info.guild_faction }}</a><= This happens immediately.
     <br>
-    <a href="{% url 'update-guild-profile' object.id %}">Update Guild Details</a>
+    <a href="{% url 'update-guild-profile' guild_info.id %}">Update Guild Details</a>
     <br>
-    {{ object.guild_name }}
+    {{ guild_info.guild_name }}
     <br>
-    {{ object.guild_realm }}
+    {{ guild_info.guild_realm }}
     <br>
-    {{ object.guild_faction }}
+    {{ guild_info.guild_faction }}
     <br>
-    {{ object.guild_created_by }}
+    {{ guild_info.guild_created_by }}
     <br>
-    {{ object.guild_information }}
+    {{ guild_info.guild_information }}
     <br>
-    {{ object.guild_battlenet_website }}
+    {{ guild_info.guild_battlenet_website }}
     <br>
-    {{ object.guild_external_website }}
+    {{ guild_info.guild_external_website }}
     <br>
-    {{ object.guild_wow_progress_link }}
+    {{ guild_info.guild_wow_progress_link }}
     <br>
-    {{ object.guild_warcraft_logs_link }}
+    {{ guild_info.guild_warcraft_logs_link }}
     <br>
-    {{ object.guild_world_of_logs_link }}
+    {{ guild_info.guild_world_of_logs_link }}
     <br>
-    {{ object.create_date }}
+    {{ guild_info.create_date }}
     <br>
-    {{ object.last_updated }}
+    {{ guild_info.last_updated }}
     <br>
-    Active Guild: {{ object.is_active }}
+    Active Guild: {{ guild_info.is_active }}
     <br>
-    Recruiting: {{ object.is_recruiting }}
+    Recruiting: {{ guild_info.is_recruiting }}
     <br>
     Recruitment Posts:
-        {% for rcp in object.recruitmentposts_set.all %}
+        {% for rcp in guild_info.recruitmentposts_set.all %}
             {% if rcp.is_post_active %}
                 <p><a href="{% url 'recruitment-post' rcp.pk %}">{{ rcp.recruitment_title }}</a></p>
             {% else %}
                 <p>Not recruiting at this time.</p>
             {% endif %}
         {% endfor %}
-
-
-
+{% endfor %}
 {% endblock %}
 
 

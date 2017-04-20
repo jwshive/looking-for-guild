@@ -23,7 +23,7 @@ My Profile - {{ user.username }}
             {% for guild in my_guilds %}
                 <tr>
                     <td><a href="{% url 'update-guild-profile' guild.id %}">Update Guild Information</a></td>
-                    <td><a href="{% url 'guild-detail' guild.id %}">{{ guild.guild_name }}</a></td>
+                    <td><a href="{% url 'guild-detail' guild.guild_realm guild.guild_name %}">{{ guild.guild_name }}</a></td>
                     <td>{{ guild.guild_realm }}</td>
                     <td>{{ guild.guild_faction }}</td>
                     <td><a href="{% url 'add-recruitment-post' guild_pk=guild.id %}">Here</a></td>
@@ -76,7 +76,7 @@ My Profile - {{ user.username }}
         {% for character in my_characters %}
             <tr>
                 <td><img src="{{ website_settings.wow_api_character_image_base_url }}/{{ character.character_profile_inset_url }}"></td>
-                <td><a href="{% url 'character-details' character.id %}">{{ character.character_name }}</a></td>
+                <td><a href="{% url 'character-details' character.character_realm character.character_name %}">{{ character.character_name }}</a></td>
                 <td>{{ character.character_realm }}</td>
                 <td>{{ character.character_faction}}</td>
                 <td>{{ character.character_class }}</td>

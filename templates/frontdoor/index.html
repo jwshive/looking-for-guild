@@ -20,7 +20,7 @@
     <div class="col-md-4">
       <h2>Player Spotlight</h2>
         {% if player_spotlight %}
-        <p><a href="{% url 'character-details' player_spotlight.id %}"><img src="{{ website_settings.wow_api_character_image_base_url }}{{ player_spotlight.character_profile_inset_url }}"></a></p>
+        <p><a href="{% url 'character-details' player_spotlight.character_realm player_spotlight.character_name %}"><img src="{{ website_settings.wow_api_character_image_base_url }}{{ player_spotlight.character_profile_inset_url }}"></a></p>
             <table>
                 <tr>
                     <th>Character Name</th>
