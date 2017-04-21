@@ -14,7 +14,7 @@ def MyProfile(request):
     context = {
         'my_guilds': Guilds.objects.filter(guild_created_by=request.user),
         'my_recruitment_posts': RecruitmentPosts.objects.select_related('guild_name').filter(guild_name__guild_created_by=request.user),
-        'my_characters': Characters.objects.filter(**character_filters).order_by('character_realm', 'character_name'),
+        'my_characters': Characters.objects.filter(**character_filters).order_by('character_realm', '-character_level', 'character_name'),
         'website_settings': WebsiteAPISettings.objects.get(pk=1),
     }
     return render(request, 'players/profile.html', context)
