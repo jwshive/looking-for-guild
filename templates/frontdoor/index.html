@@ -35,6 +35,10 @@
                     <td>{% if player_spotlight.main_role != "NO_ROLE_SELECTED" %}{{ player_spotlight.get_main_role_display }}{% else %} No Role Selected{% endif %}</td>
                 </tr>
                 <tr>
+                    <th>Character iLevel</th>
+                    <td>{{ player_spotlight.equipped_ilevel }}/{{ player_spotlight.max_ilevel }}</td>
+                </tr>
+                <tr>
                     <th>Character Realm</th>
                     <td>{{ player_spotlight.character_realm }}</td>
                 </tr>
