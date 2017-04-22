@@ -65,7 +65,7 @@ def CreateGuild(request):
 class CreateRecruitmentPost(CreateView):
     model = RecruitmentPosts
     template_name = 'guilds/add_recruitment_post.html'
-    fields = 'recruiting_levels', 'recruiting_classes', 'recruitment_title', 'recruitment_post', 'is_post_active'
+    fields = 'recruiting_levels', 'recruiting_classes', 'recruitment_title', 'raid_days', 'raid_start_time', 'raid_end_time', 'recruitment_post', 'is_post_active'
     success_url = '/players/profile'
     
     def get_context_data(self, **kwargs):

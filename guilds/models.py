@@ -44,10 +44,37 @@ class GuildManagers(models.Model):
         return "%s - %s - %s" % (self.guild_id, self.guild_id.guild_realm.realm_name, self.guild_id.guild_faction.faction_name)
 
 
+class RaidDays(models.Model):
+    raid_day = models.CharField(max_length=10)
+
+    class Meta:
+        managed = True
+        db_table = 'raid_days'
+        verbose_name_plural = 'Raid Day Listing'
+
+    def __str__(self):
+        return self.raid_day
+
+
+class RaidTimes(models.Model):
+    time_value = models.TimeField()
+
+    class Meta:
+        managed = True
+        db_table = 'raid_times'
+        verbose_name_plural = 'Raid Time Listings'
+
+    def __str__(self):
+        return str(self.time_value)
+
+
 class RecruitmentPosts(models.Model):
     guild_name = models.ForeignKey(Guilds)
     recruiting_levels = models.CharField(max_length=100)
     recruiting_classes = models.ManyToManyField(Classes)
+    raid_days = models.ManyToManyField(RaidDays)
+    raid_start_time = models.ForeignKey(RaidTimes, blank=True, null=True, related_name='RaidStartTime')
+    raid_end_time = models.ForeignKey(RaidTimes, blank=True, null=True, related_name='RaidEndTime')
     recruitment_title = models.CharField(max_length=200)
     recruitment_post = models.TextField()
     is_post_active = models.BooleanField(default=True)
