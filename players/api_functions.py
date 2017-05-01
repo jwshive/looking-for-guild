@@ -38,8 +38,9 @@ def get_oauth_character_names(access_token):
     toon_names = []
     realm_names = []
     for result in data['characters']:
-        toon_names.append(result['name'])
-        realm_names.append(result['realm'])
+        if result['level'] >= 10:
+            toon_names.append(result['name'])
+            realm_names.append(result['realm'])
 
     characters = list(zip(toon_names, realm_names))
 
