@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+try:
+        import urllib2
+except ImportError:
+        from urllib.request import import urlopen
+
 import json
 import datetime
 import codecs
