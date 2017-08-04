@@ -45,8 +45,10 @@ today = datetime.datetime.now().strftime('%Y-%m-%d')
 for info in data['realms']:
     realm_type = info['type']
     realm_population = info['population']
-    realm_name = info['name'].replace('\'', '\\\'')
-    realm_slug = info['slug'].replace('\'', '\\\'')
+    realm_name = info['name']
+    realm_slug = info['slug']
+    #realm_name = info['name'].replace('\'', '\\\'')
+    #realm_slug = info['slug'].replace('\'', '\\\'')
     realm_battlegroup = info['battlegroup']
     realm_locale = info['locale']
     realm_timezone = info['timezone']
