@@ -54,7 +54,7 @@ for info in data['realms']:
 
     sql = "INSERT INTO realms (realm_type, realm_population, realm_name, realm_slug, realm_battlegroup, realm_locale, realm_timezone, realm_connected_realms, load_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);"
 
-    cur.execute(sql, (realm_type, realm_population, realm_name, realm_slug, realm_b  attlegroup, realm_locale, realm_timezone, realm_connected_realms, today))
+    cur.execute(sql, (realm_type, realm_population, realm_name, realm_slug, realm_battlegroup, realm_locale, realm_timezone, realm_connected_realms, today))
     conn.commit()
 
 conn.close()
