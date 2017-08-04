@@ -38,6 +38,8 @@ conn = psycopg2.connect(
         port=postgresql_url.port
         )
 
+cur = conn.cursor()
+
 today = datetime.datetime.now().strftime('%Y-%m-%d')
 
 for info in data['realms']:
@@ -54,7 +56,7 @@ for info in data['realms']:
         realm_type, realm_population, realm_name, realm_slug, realm_battlegroup, realm_locale, realm_timezone,
         realm_connected_realms, today)
 
-    conn.execute(sql)
+    cur.execute(sql)
     conn.commit()
 
 conn.close()
