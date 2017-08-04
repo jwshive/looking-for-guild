@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 try:
-        import urllib2
+    import urllib2
 except ImportError:
-        from urllib.request import import urlopen
-
+    from urllib.request import urlopen
 import json
 import datetime
 import codecs
