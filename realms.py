@@ -52,11 +52,9 @@ for info in data['realms']:
     realm_timezone = info['timezone']
     realm_connected_realms = ','.join(info['connected_realms'])
 
-    sql = "INSERT INTO realms (realm_type, realm_population, realm_name, realm_slug, realm_battlegroup, realm_locale, realm_timezone, realm_connected_realms, load_date) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}');".format(
-        realm_type, realm_population, realm_name, realm_slug, realm_battlegroup, realm_locale, realm_timezone,
-        realm_connected_realms, today)
+    sql = "INSERT INTO realms (realm_type, realm_population, realm_name, realm_slug, realm_battlegroup, realm_locale, realm_timezone, realm_connected_realms, load_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);"
 
-    cur.execute(sql)
+    cur.execute(sql, (realm_type, realm_population, realm_name, realm_slug, realm_b  attlegroup, realm_locale, realm_timezone, realm_connected_realms, today))
     conn.commit()
 
 conn.close()
